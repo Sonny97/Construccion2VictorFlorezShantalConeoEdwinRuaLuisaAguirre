@@ -1,13 +1,13 @@
 package app.domain.model;
 
-import app.domain.model.emuns.Role;
+
 
 public class Person {
 	private long id;
 	private String name;
 	private long document;
 	private int age;
-	private Role role;
+	
 	
 	
 	public long getId() {
@@ -34,12 +34,7 @@ public class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
+	
 	
 	
 }
