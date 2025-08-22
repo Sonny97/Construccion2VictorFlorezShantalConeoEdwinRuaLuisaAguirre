@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
-public class Patient {
+public class Patient extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +32,25 @@ public class Patient {
 
     @Email(message = "El correo electrónico debe tener un formato válido")
     private String email;
+
+    public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public long getIdNumber() {
+		return idNumber;
+	}
+	public void setIdNumber(long idNumber) {
+		this.idNumber = idNumber;
+	}
 
     
 }
