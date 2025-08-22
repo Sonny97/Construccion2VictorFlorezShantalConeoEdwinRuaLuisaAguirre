@@ -8,8 +8,6 @@ public class Person {
 	private long document;
 	private int age;
 	
-	
-	
 	public long getId() {
 		return id;
 	}

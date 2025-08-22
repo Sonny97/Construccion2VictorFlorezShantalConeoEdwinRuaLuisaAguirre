@@ -27,6 +27,4 @@ public class User extends Person {
 		this.role = role;
 	}
 	
-	
-	
 }
