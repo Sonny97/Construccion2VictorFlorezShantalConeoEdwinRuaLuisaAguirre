@@ -30,6 +30,12 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
+ 	<dependency>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-actuator</artifactId>
+ 	</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -49,7 +55,34 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	
+   <dependency>
+     <groupId>org.wso2.brs</groupId>
+     <artifactId>HealthCareService_Facts</artifactId>
+     <version>2.2.0</version>
+   </dependency>
+ 
+   <dependency>
+     <groupId>org.wso2.brs</groupId>
+     <artifactId>HealthCareService_Facts</artifactId>
+     <version>2.2.0</version>
+   </dependency>
+
+   
+<!-- Validaciones patient-->
+    <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+    </dependency>
+	
+    <!-- Spring Boot Starter Validation -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
+
+ </dependencies>
 
 	<build>
 		<plugins>

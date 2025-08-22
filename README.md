@@ -16,7 +16,7 @@
 # 📌 Proyecto: Sistema de Gestión de Información Clínica (Clinica IPS 2024)
 
 ## 🏫 Contexto Académico
-Este proyecto se desarrolla en la materia **Construcción del Software 2** bajo la guía de **Víctor**, con la participación de **Shandal** y **Xavier** como integrantes del equipo de desarrollo.
+Este proyecto se desarrolla en la materia **Construcción del Software 2** bajo la guía de **Víctor**, con la participación de **Shandal** y **Xavier** , **Luisa** como integrantes del equipo de desarrollo.
 
 ---
 
