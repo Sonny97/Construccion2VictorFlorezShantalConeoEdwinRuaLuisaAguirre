@@ -17,3 +17,9 @@ public class CreateUsers {
         userPort.save(user);
     }
 }
+
+// CASOS DE USO
+// PERSONAL ADMINISTRATIVO
+// RECURSOS HUMANOS
+// MEDICOS
+// ENFERMERAS
