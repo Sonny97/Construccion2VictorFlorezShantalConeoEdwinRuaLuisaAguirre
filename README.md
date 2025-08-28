@@ -13,6 +13,20 @@
 - Git
 - sepa la chingada que mas...
 
+## 🔁 Clonar el repositorio
+
+Para clonar el repositorio en tu máquina local, utiliza los siguientes comandos:
+1. git clone url //para clonar el repo en el local
+2. git add . // para tomar los cambios listos a subir
+3. git commit -m "mensaje" // para comentar sobre el cambio realizado
+4. git pull origin develop // para actualizar los cambios mas recientes de la rama develop (usar solo 1 vez terminado todo el desarrollo)
+5. git push origin feature/nombre-rama // para subir los cambios al repositorio
+
+- comandos aparte:
+  git checkout -b feature/nombre-rama //para crear una rama nueva
+  git checkout feature/nombre-rama // para cambiarse a otra rama
+  git fetch // para actualizar las ramas y hashes que esten en develop
+
 # 📌 Proyecto: Sistema de Gestión de Información Clínica (Clinica IPS 2024)
 
 ## 🏫 Contexto Académico
