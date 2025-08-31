@@ -10,7 +10,7 @@ public class UpdatePatient {
         if (patientPort.findById(patient.getId()) == null) {
 			throw new Exception("Paciente no encontrado");
 		}
-
+        
         patientPort.save(patient);
     }
 }

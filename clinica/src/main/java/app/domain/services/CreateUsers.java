@@ -4,6 +4,7 @@ import app.domain.ports.UserPort;
 import app.domain.model.User;
 
 public class CreateUsers {
+
     private UserPort userPort;
 
     public void create(User user) throws Exception {

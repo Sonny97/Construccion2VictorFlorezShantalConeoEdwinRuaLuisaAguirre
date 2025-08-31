@@ -17,7 +17,7 @@ public class CreatePatient {
         return patientRepository.save(patient);
     }
 
-    public Patient findByIdNumber(String idNumber) {
+    public Patient findByIdNumber(Long idNumber) {
         return patientRepository.findByIdNumber(idNumber);
     }
 
