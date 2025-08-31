@@ -14,7 +14,13 @@ public class CreatePatient {
     private PatientRepository patientRepository;
 
     public Patient registerPatient(Patient patient) {
+        try {
+            patientRepository.findByIdNumber(patient.idNumber);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
         return patientRepository.save(patient);
+        System.out.println("Paciente registrado exitosamente");
     }
 
     public Patient findByIdNumber(String idNumber) {

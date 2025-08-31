@@ -12,4 +12,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     Patient findByIdNumber(String idNumber);
 
     List<Patient> findByFullNameContainingIgnoreCase(String fullName);
+    List<Patient> findByFullName(String fullname);
+    Patient findByIdNumber(Long idNumber);
+    Patient Save(Patient patient);
 }
