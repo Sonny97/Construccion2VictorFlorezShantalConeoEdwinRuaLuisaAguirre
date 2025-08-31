@@ -19,6 +19,7 @@ public class CreatePatient {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        patientRepository.MedicalRegister(register);
         return patientRepository.save(patient);
         System.out.println("Paciente registrado exitosamente");
     }
