@@ -23,7 +23,7 @@ public class CreatePatient {
         System.out.println("Paciente registrado exitosamente");
     }
 
-    public Patient findByIdNumber(String idNumber) {
+    public Patient findByIdNumber(Long idNumber) {
         return patientRepository.findByIdNumber(idNumber);
     }
 

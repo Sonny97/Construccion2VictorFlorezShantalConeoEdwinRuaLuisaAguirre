@@ -1,56 +1,60 @@
 package app.domain.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
-@Entity
-public class Patient extends Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Patient extends Person{
     private Long id;
-
-    @NotBlank(message = "El nombre completo es obligatorio")
-    private String fullName;
-
-    @NotBlank(message = "La cédula es obligatoria")
-    @Size(min = 6, max = 15, message = "La cédula debe tener entre 6 y 15 caracteres")
-    private String idNumber;
-
-    @Past(message = "La fecha de nacimiento debe ser en el pasado")
+    private String firstName;
+    private String lastName;
+    private String documentId;
     private LocalDate birthDate;
-
-    @NotBlank(message = "El género es obligatorio")
     private String gender;
-
-    @NotBlank(message = "La dirección es obligatoria")
     private String address;
-
-    @Pattern(regexp = "\\d{10}", message = "El número de teléfono debe tener 10 dígitos")
     private String phoneNumber;
+    private String emergencyContact;
+    private String allergies;
+    private String medicalConditions;
 
-    @Email(message = "El correo electrónico debe tener un formato válido")
-    private String email;
-
-    public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getFullName() {
-		return fullName;
-	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-	public long getIdNumber() {
-		return idNumber;
-	}
-	public void setIdNumber(long idNumber) {
-		this.idNumber = idNumber;
-	}
-
+    // Constructores
+    public Patient() {}
     
+    public Patient(String firstName, String lastName, String documentId, 
+                  LocalDate birthDate, String gender, String address, 
+                  String phoneNumber, String emergencyContact, 
+                  String allergies, String medicalConditions) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.documentId = documentId;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.emergencyContact = emergencyContact;
+        this.allergies = allergies;
+        this.medicalConditions = medicalConditions;
+    }
+
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getDocumentId() { return documentId; }
+    public void setDocumentId(String documentId) { this.documentId = documentId; }
+    public LocalDate getBirthDate() { return birthDate; }
+    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getEmergencyContact() { return emergencyContact; }
+    public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
+    public String getAllergies() { return allergies; }
+    public void setAllergies(String allergies) { this.allergies = allergies; }
+    public String getMedicalConditions() { return medicalConditions; }
+    public void setMedicalConditions(String medicalConditions) { this.medicalConditions = medicalConditions; }
 }
