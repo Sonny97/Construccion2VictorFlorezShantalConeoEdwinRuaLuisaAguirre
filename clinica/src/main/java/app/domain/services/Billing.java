@@ -1,4 +1,4 @@
-package app.domain.model;
+package app.domain.services;
 
 public class Billing {
     private String billingId;       // Unique billing ID
