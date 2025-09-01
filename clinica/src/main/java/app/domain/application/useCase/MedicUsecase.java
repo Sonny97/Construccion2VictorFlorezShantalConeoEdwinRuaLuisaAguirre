@@ -1,14 +1,21 @@
 
-package domain.usecases;
+package app.domain.application.useCase;
+import app.domain.model.emuns.*;
 
-import domain.model.*;
-import domain.ports.PatientRepository;
 
-public class MedicUseCase {
-    private final PacienteRepository pacienteRepository;
+
+import java.time.LocalDate;
+
+import app.domain.model.*;
+import app.domain.repository.PatientRepository;
+import app.domain.model.emuns.Role;
+
+public class MedicUsecase {
+    private final PatientRepository patientRepository;
+    private final Role role;
 
     public managePatient(PatientRepository patientRepository) {
-        this.pacienteRepository = pacienteRepository;
+        this.patientRepository = patientRepository;
     }
 
     public void registerPatient(String firstName, String lastName, String documentId, 
@@ -16,7 +23,7 @@ public class MedicUseCase {
                   String phoneNumber, String emergencyContact, 
                   String allergies, String medicalConditions) {
         
-        if (rol != Rol.MEDIC) {
+        if (role != Role.MEDIC) {
             throw new IllegalArgumentException("Solo Personal Administrativo puede registrar pacientes");
         }
 

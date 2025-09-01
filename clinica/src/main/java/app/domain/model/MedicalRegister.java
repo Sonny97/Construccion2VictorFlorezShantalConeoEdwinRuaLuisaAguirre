@@ -1,4 +1,4 @@
-package domain.model;
+package app.domain.model;
 
 public class MedicalRegister {
     private final String date;

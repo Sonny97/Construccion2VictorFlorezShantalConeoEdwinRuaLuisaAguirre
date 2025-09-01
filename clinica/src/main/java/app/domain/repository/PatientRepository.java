@@ -1,5 +1,6 @@
 package app.domain.repository;
 
+import app.domain.model.MedicalRegister;
 import app.domain.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
