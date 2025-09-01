@@ -3,7 +3,7 @@
 ## Integrantes del equipo
 - Victor Manuel Florez Taborda (https://github.com/Sonny97)
 - Shantal Coneo Garcia (github)
-- Edwing xavier rua dominguez (github)
+- Edwing xavier rua dominguez ()
 - Luisa Fernanda Aguirre (github)
 
 ## Tecnologia de desarrollo 
