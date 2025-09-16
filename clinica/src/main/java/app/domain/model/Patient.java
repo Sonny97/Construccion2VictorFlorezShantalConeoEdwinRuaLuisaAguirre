@@ -14,6 +14,7 @@ public class Patient extends Person{
     private String emergencyContact;
     private String allergies;
     private String medicalConditions;
+    private MedicalRegister medicalRegister [];
 
     // Constructores
     public Patient() {}
@@ -32,6 +33,7 @@ public class Patient extends Person{
         this.emergencyContact = emergencyContact;
         this.allergies = allergies;
         this.medicalConditions = medicalConditions;
+        this.medicalRegister = null;
     }
 
     // Getters y Setters
@@ -57,4 +59,5 @@ public class Patient extends Person{
     public void setAllergies(String allergies) { this.allergies = allergies; }
     public String getMedicalConditions() { return medicalConditions; }
     public void setMedicalConditions(String medicalConditions) { this.medicalConditions = medicalConditions; }
+    public MedicalRegister[] getMedicalRegister() {return this.medicalRegister;}
 }
