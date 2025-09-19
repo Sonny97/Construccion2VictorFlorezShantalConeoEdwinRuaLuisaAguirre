@@ -37,7 +37,8 @@ public class UserMapper {
         user.setBirthDate(entity.getBirthDate());
         user.setGender(entity.getGender());
         user.setAddress(entity.getAddress());
-        user.setPhoneNumber(String.valueOf(entity.getPhoneNumber()));
+        user.setPhoneNumber(entity.getPhoneNumber());
+
         return user;
     }
     
