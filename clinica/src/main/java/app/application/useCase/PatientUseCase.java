@@ -1,4 +1,4 @@
-package app.domain.application.useCase;
+package app.application.useCase;
 
 import app.domain.model.Patient;
 import app.domain.services.CreatePatient;
@@ -66,6 +66,8 @@ public class PatientUseCase {
      * @param patient Paciente a validar
      * @throws IllegalArgumentException Si los datos no son válidos
      */
+
+     //esto se hiria para validator 
     private void validatePatientData(Patient patient) {
         if (patient.getFirstName() == null || patient.getFirstName().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del paciente es requerido");
@@ -75,9 +77,9 @@ public class PatientUseCase {
             throw new IllegalArgumentException("El apellido del paciente es requerido");
         }
         
-        if (patient.getDocumentId() == null || patient.getDocumentId().trim().isEmpty()) {
-            throw new IllegalArgumentException("El documento de identidad es requerido");
-        }
+        // if (patient.getDocumentId() == null || patient.getDocumentId().trim().isEmpty()) {
+        //     throw new IllegalArgumentException("El documento de identidad es requerido");
+        // }
         
         if (patient.getBirthDate() == null) {
             throw new IllegalArgumentException("La fecha de nacimiento es requerida");
@@ -87,9 +89,9 @@ public class PatientUseCase {
             throw new IllegalArgumentException("La fecha de nacimiento no puede ser futura");
         }
         
-        if (patient.getPhoneNumber() == null || patient.getPhoneNumber().trim().isEmpty()) {
-            throw new IllegalArgumentException("El número de teléfono es requerido");
-        }
+        // if (patient.getPhoneNumber() == null || patient.getPhoneNumber().trim().isEmpty()) {
+        //     throw new IllegalArgumentException("El número de teléfono es requerido");
+        // }
     }
 
     /**

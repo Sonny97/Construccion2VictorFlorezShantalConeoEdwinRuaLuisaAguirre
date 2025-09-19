@@ -1,7 +1,8 @@
 package app.domain.services;
 
 import app.domain.model.Patient;
-import app.domain.repository.PatientRepository;
+import app.infrastructure.persistence.repository.PatientRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,14 @@
 package app.domain.services;
 
 import app.domain.ports.UserPort;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import app.domain.model.User;
 
 public class CreateUsers {
-
+    
+    @Autowired
     private UserPort userPort;
 
     public void create(User user) throws Exception {
@@ -18,9 +22,3 @@ public class CreateUsers {
         userPort.save(user);
     }
 }
-
-// CASOS DE USO
-// PERSONAL ADMINISTRATIVO
-// RECURSOS HUMANOS
-// MEDICOS
-// ENFERMERAS
