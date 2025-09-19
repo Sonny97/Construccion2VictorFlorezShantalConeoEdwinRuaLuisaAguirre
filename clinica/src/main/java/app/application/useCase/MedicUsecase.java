@@ -1,5 +1,5 @@
 
-package app.domain.application.useCase;
+package app.application.useCase;
 import app.domain.model.emuns.*;
 
 
@@ -7,8 +7,8 @@ import app.domain.model.emuns.*;
 import java.time.LocalDate;
 
 import app.domain.model.*;
-import app.domain.repository.PatientRepository;
 import app.domain.model.emuns.Role;
+import app.infrastructure.persistence.repository.PatientRepository;
 
 public class MedicUsecase {
     private final PatientRepository patientRepository;

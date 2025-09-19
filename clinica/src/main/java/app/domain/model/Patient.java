@@ -6,11 +6,11 @@ public class Patient extends Person{
     private Long id;
     private String firstName;
     private String lastName;
-    private String documentId;
+    private int documentId;
     private LocalDate birthDate;
-    private String gender;
+    private String gender; 
     private String address;
-    private String phoneNumber;
+    private int phoneNumber;
     private String emergencyContact;
     private String allergies;
     private String medicalConditions;
@@ -18,9 +18,9 @@ public class Patient extends Person{
     // Constructores
     public Patient() {}
     
-    public Patient(String firstName, String lastName, String documentId, 
+    public Patient(String firstName, String lastName, int documentId, 
                   LocalDate birthDate, String gender, String address, 
-                  String phoneNumber, String emergencyContact, 
+                  int phoneNumber, String emergencyContact, 
                   String allergies, String medicalConditions) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,16 +41,16 @@ public class Patient extends Person{
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
-    public String getDocumentId() { return documentId; }
-    public void setDocumentId(String documentId) { this.documentId = documentId; }
+    public int getDocumentId() { return documentId; }
+    public void setDocumentId(int documentId) { this.documentId = documentId; }
     public LocalDate getBirthDate() { return birthDate; }
     public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
     public String getGender() { return gender; }
     public void setGender(String gender) { this.gender = gender; }
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public int getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
     public String getEmergencyContact() { return emergencyContact; }
     public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
     public String getAllergies() { return allergies; }

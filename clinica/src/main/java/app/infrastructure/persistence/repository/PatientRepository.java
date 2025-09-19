@@ -1,7 +1,9 @@
-package app.domain.repository;
+package app.infrastructure.persistence.repository;
 
 import app.domain.model.MedicalRegister;
 import app.domain.model.Patient;
+import app.infrastructure.persistence.entities.UserEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
