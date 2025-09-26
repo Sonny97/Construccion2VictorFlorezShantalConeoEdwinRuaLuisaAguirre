@@ -6,7 +6,7 @@ public class Patient extends Person{
     private Long id;
     private String firstName;
     private String lastName;
-    private int documentId;
+    private long documentId;
     private LocalDate birthDate;
     private String gender; 
     private String address;
@@ -43,8 +43,8 @@ public class Patient extends Person{
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public String getLastName() { return lastName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
-    public int getDocumentId() { return documentId; }
-    public void setDocumentId(int documentId) { this.documentId = documentId; }
+    public long getDocumentId() { return documentId; }
+    public void setDocumentId(long documentId) { this.documentId = documentId; }
     public LocalDate getBirthDate() { return birthDate; }
     public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
     public String getGender() { return gender; }

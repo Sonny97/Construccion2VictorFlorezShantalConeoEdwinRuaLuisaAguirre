@@ -19,7 +19,7 @@ public class UserMapper {
         entity.setBirthDate(user.getBirthDate());
         entity.setGender(user.getGender());
         entity.setAddress(user.getAddress());
-        entity.setPhoneNumber(Integer.parseInt(user.getPhoneNumber()));        
+        entity.setPhoneNumber(user.getPhoneNumber());        
         return entity;
     }
 
