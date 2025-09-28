@@ -3,16 +3,19 @@ package app.adapter.in.client;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import java.util.List;
 import app.domain.model.Patient;
 import app.domain.model.Visit;
-
-
+import app.domain.services.VisitService;
 import app.adapter.in.builder.UserBuilder;
 import app.application.useCase.PatientUseCase;
+import app.domain.services.PatientService;
+
 
 public class NurseClient {
     private static Scanner scanner = new Scanner(System.in);
+    private VisitService visitService = new VisitService();
+    private PatientService patientService = new PatientService();
 
     @Autowired
     private PatientUseCase patientUseCase;
@@ -25,7 +28,7 @@ public class NurseClient {
         boolean inSession = true;
 
         while (inSession) {
-            System.out.println("\n📋 Menú de Enfermería");
+            System.out.println("\n Menú de Enfermería");
             System.out.println("1. Registro de visitas de pacientes");
             System.out.println("2. Historial de visitas de pacientes");
             System.out.println("3. Salir del sistema");
@@ -55,7 +58,7 @@ public class NurseClient {
         Long nurseId = scanner.nextLong();
         scanner.nextLine();
 
-        System.out.println("📊 Registro de signos vitales:");
+        System.out.println("Registro de signos vitales:");
         System.out.print("Presión arterial: ");
         String bloodPressure = scanner.nextLine();
         System.out.print("Temperatura: ");
@@ -71,7 +74,7 @@ public class NurseClient {
         double oxygenSaturation = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.println("💊 Medicamentos administrados:");
+        System.out.println("Medicamentos administrados:");
         System.out.print("Ingrese medicamentos (separados por coma): ");
         String medications = scanner.nextLine();
 
@@ -79,18 +82,18 @@ public class NurseClient {
         System.out.print("Ingrese procedimientos (separados por coma): ");
         String procedures = scanner.nextLine();
 
-        System.out.println("📝 Observaciones relevantes:");
+        System.out.println("Observaciones relevantes:");
         System.out.print("Ingrese observaciones: ");
         String observations = scanner.nextLine();
 
-        Visit visit = visitService.registerVisit(patientId, nurseId, bloodPressure,
+        Visit visit = VisitService.registerVisit(patientId, nurseId, bloodPressure,
                 temperature, heartRate, respiratoryRate, oxygenSaturation,
                 medications, procedures, observations);
 
         if (visit != null) {
-            System.out.println("✅ Visita registrada con ID: " + visit.getId());
+            System.out.println("Visita registrada con ID: " + visit.getId());
         } else {
-            System.out.println("❌ Error al registrar la visita. Verifique los IDs.");
+            System.out.println("Error al registrar la visita. Verifique los IDs.");
         }
     }
 
@@ -100,15 +103,15 @@ public class NurseClient {
         Long patientId = scanner.nextLong();
         scanner.nextLine();
 
-        List<Visit> visits = visitService.getVisitsByPatientId(patientId);
-        Patient patient = patientService.getPatientById(patientId);
+    List<Visit> visits = visitService.getVisitsByPatientId(patientId);
+    Patient patient = patientService.getPatientById(patientId);
 
         if (patient == null) {
-            System.out.println("❌ Paciente no encontrado.");
+            System.out.println("Paciente no encontrado.");
             return;
         }
 
-        System.out.println("📋 Historial de visitas de: " + patient.getFirstName() + " " + patient.getLastName());
+        System.out.println("Historial de visitas de: " + patient.getFirstName() + " " + patient.getLastName());
 
         for (Visit v : visits) {
             System.out.println("──────────────────────────────");
@@ -116,16 +119,16 @@ public class NurseClient {
             System.out.println("Enfermera: " + v.getNurse().getFirstName() + " " + v.getNurse().getLastName());
             System.out.println("Presión arterial: " + v.getBloodPressure());
             System.out.println("Temperatura: " + v.getTemperature());
-            System.out.println("Frecuencia cardíaca: " + v.getHeartRate());
+            System.out.println("Frecuencia cardíaca: " + v.getPulse());
             System.out.println("Frecuencia respiratoria: " + v.getRespiratoryRate());
-            System.out.println("Saturación de oxígeno: " + v.getOxygenSaturation());
+            System.out.println("Saturación de oxígeno: " + v.getOxygenLevel());
             System.out.println("Medicamentos: " + v.getMedications());
             System.out.println("Procedimientos: " + v.getProcedures());
             System.out.println("Observaciones: " + v.getObservations());
         }
 
         if (visits.isEmpty()) {
-            System.out.println("⚠️ No hay visitas registradas para este paciente.");
+            System.out.println(" No hay visitas registradas para este paciente.");
         }
     }
 }

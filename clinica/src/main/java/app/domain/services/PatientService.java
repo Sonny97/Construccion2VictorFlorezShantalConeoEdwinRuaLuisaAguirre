@@ -1,21 +1,8 @@
-package app.domain.services.medic;
-
 import app.domain.model.Visit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class VisitService {
-
-    public List<Visit> getVisitsByPatientId(Long patientId) {
-    List<Visit> resultado = new ArrayList<>();
-    for (Visit visit : visits) {
-        if (visit.getPatientId() == patientId) {
-            resultado.add(visit);
-        }
-    }
-    return resultado;
-}
-    
     private List<Visit> visits = new ArrayList<>();
     private int nextId = 1;
 
@@ -39,3 +26,4 @@ public class VisitService {
         return visit;
     }
 }
+
