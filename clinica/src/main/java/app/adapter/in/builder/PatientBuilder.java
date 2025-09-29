@@ -10,10 +10,8 @@ public class PatientBuilder {
     private UserValidator userValidator;
 
     public User build(String firstName, String lastName, String email, int documentId, String birthDate, String gender,
-            String address, int phoneNumber, String userName, String password) throws Exception {
+            String address, int phoneNumber, String) throws Exception {
         User user = new User();
-        user.setUserName(userValidator.userNameValidator(userName));
-        user.setPassword(userValidator.passwordValidator(password));
         user.setFirstName(userValidator.nameValidator(firstName));
         user.setLastName(userValidator.lastNameValidator(lastName));
         user.setDocumentId(documentId);
