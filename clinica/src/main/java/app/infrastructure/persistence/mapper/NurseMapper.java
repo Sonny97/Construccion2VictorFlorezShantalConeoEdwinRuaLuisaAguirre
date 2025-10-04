@@ -1,12 +1,12 @@
 package app.infrastructure.persistence.mapper;
 
-import app.infrastructure.persistence.entities.EnfermeraEntity;
+import app.infrastructure.persistence.entities.NurseEntity;
 import app.domain.model.Patient;
 
-public class EnfermeraMapper {
+public class NurseMapper {
 
     // Entity -> Domain
-    public Patient toDomain(EnfermeraEntity entity) {
+    public Patient toDomain(NurseEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -27,11 +27,11 @@ public class EnfermeraMapper {
     }
 
     
-    public EnfermeraEntity toEntity(Patient patient) {
+    public NurseEntity toEntity(Patient patient) {
         if (patient == null) {
             return null;
         }
-        EnfermeraEntity entity = new EnfermeraEntity();
+        NurseEntity entity = new NurseEntity();
         entity.setId(patient.getId());
         entity.setUserName(patient.getUserName());
         entity.setPassword(patient.getPassword());

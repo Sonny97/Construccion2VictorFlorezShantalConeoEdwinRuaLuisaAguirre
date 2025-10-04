@@ -1,3 +1,4 @@
+package app.domain.services;
 import app.domain.model.Visit;
 import java.util.ArrayList;
 import java.util.List;

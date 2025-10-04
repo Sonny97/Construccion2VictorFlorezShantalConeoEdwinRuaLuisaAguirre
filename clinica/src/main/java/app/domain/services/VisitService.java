@@ -1,4 +1,4 @@
-package app.domain.services.medic;
+package app.domain.services;
 
 import app.domain.model.Visit;
 import java.util.ArrayList;
