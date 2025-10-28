@@ -16,11 +16,11 @@ public class CreatePatient {
 
     public Patient registerPatient(Patient patient) {
         try {
-            patientRepository.findByIdNumber(patient.idNumber);
+            patientRepository.findByIdNumber(patient.getId());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        patientRepository.MedicalRegister(register);
+        patientRepository.MedicalRegister(patient.getBirthDate(), patient.getId(), patient.getMedicalRegister(), patient.getMedicalConditions(), "diagnostico")
         return patientRepository.save(patient);
         System.out.println("Paciente registrado exitosamente");
     }

@@ -1,8 +1,10 @@
+package app.domain.services;
+
 import app.domain.model.Visit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VisitService {
+public class PatientService {
     private List<Visit> visits = new ArrayList<>();
     private int nextId = 1;
 
