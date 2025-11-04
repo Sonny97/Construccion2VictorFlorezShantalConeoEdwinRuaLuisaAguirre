@@ -1,10 +1,17 @@
 package app.domain.services;
 
-import app.domain.ports.UserPort;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import app.application.exceptions.BusinessException;
+
+
 
 import app.domain.model.User;
+
+import app.domain.ports.UserPort;
+
 
 public class CreateUsers {
     

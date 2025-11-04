@@ -27,7 +27,7 @@ public class UserMapper {
         if (entity == null) return null;
         User user = new User();
         user.setId(entity.getId());
-        user.setRole(Role.valueOf(entity.getRole()));
+        user.setRole(parseRole(entity.getRole()));
         user.setUserName(entity.getUserName());
         user.setPassword(entity.getPassword());
         user.setFirstName(entity.getFirstName());
@@ -41,5 +41,15 @@ public class UserMapper {
 
         return user;
     }
-    
+
+    private static Role parseRole(String role) {
+        if (role == null) return null;
+        try {
+            return Role.valueOf(role.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return null;
+        }
+    }
 }
+    
+
