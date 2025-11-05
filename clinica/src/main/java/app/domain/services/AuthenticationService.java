@@ -1,6 +1,6 @@
 package app.domain.services;
 
-import app.domain.model.User;
+import app.domain.model.Employee;
 import app.domain.model.auth.AuthCredentials;
 import app.domain.model.auth.TokenResponse;
 import app.domain.ports.AuthenticationPort;
@@ -21,13 +21,13 @@ public class AuthenticationService {
     
 
     public TokenResponse authenticate(AuthCredentials credentials) throws Exception{
-        User user = this.getUserByUsername(credentials.getUsername());
+        Employee user = this.getUserByUsername(credentials.getUsername());
         this.validatePassword(credentials.getPassword(), user.getPassword());
         return authenticationPort.authenticate(credentials, String.valueOf(user.getRole()));
     }
 
-    private User getUserByUsername(String username)  throws Exception{
-    	User user = new User();
+    private Employee getUserByUsername(String username)  throws Exception{
+    	Employee user = new Employee();
     	user.setUserName(username);
         user = userPort.findByUserName(user);
         if (user == null) {

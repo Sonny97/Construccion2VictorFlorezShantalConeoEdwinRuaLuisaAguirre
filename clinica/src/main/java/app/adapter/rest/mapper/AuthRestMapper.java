@@ -1,9 +1,9 @@
-package app.infrastructure.persistence.mapper;
+package app.adapter.rest.mapper;
 
 import org.springframework.stereotype.Component;
 
-import app.application.DTOs.AuthRequest;
-import app.application.DTOs.TokenResponseDto;
+import app.adapter.rest.request.AuthRequest;
+import app.adapter.rest.response.TokenResponseDto;
 import app.domain.model.auth.AuthCredentials;
 import app.domain.model.auth.TokenResponse;
 

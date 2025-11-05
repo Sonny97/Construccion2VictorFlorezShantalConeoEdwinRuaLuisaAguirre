@@ -1,45 +1,45 @@
 package app.infrastructure.persistence.mapper;
 
-import app.domain.model.User;
+import app.domain.model.Employee;
 import app.domain.model.emuns.Role;
 import app.infrastructure.persistence.entities.UserEntity;
 
 public class UserMapper {
-    public static UserEntity toEntity(User user) {
-        if (user == null) return null;
+    public static UserEntity toEntity(Employee employee) {
+        if (employee == null) return null;
         UserEntity entity = new UserEntity();
-        entity.setId(user.getId());
-        entity.setRole(user.getRole().name());
-        entity.setUserName(user.getUserName());
-        entity.setPassword(user.getPassword());
-        entity.setFirstName(user.getFirstName());
-        entity.setLastName(user.getLastName());
-        entity.setDocumentId(user.getDocumentId());
-        entity.setEmail(user.getEmail());
-        entity.setBirthDate(user.getBirthDate());
-        entity.setGender(user.getGender());
-        entity.setAddress(user.getAddress());
-        entity.setPhoneNumber(user.getPhoneNumber());        
+        entity.setId(employee.getId());
+        entity.setRole(employee.getRole().name());
+        entity.setUserName(employee.getUserName());
+        entity.setPassword(employee.getPassword());
+        entity.setFirstName(employee.getFirstName());
+        entity.setLastName(employee.getLastName());
+        entity.setDocumentId(employee.getDocumentId());
+        entity.setEmail(employee.getEmail());
+        entity.setBirthDate(employee.getBirthDate());
+        entity.setGender(employee.getGender());
+        entity.setAddress(employee.getAddress());
+        entity.setPhoneNumber(employee.getPhoneNumber());        
         return entity;
     }
 
-    public static User toDomain(UserEntity entity) {
+    public static Employee toDomain(UserEntity entity) {
         if (entity == null) return null;
-        User user = new User();
-        user.setId(entity.getId());
-        user.setRole(parseRole(entity.getRole()));
-        user.setUserName(entity.getUserName());
-        user.setPassword(entity.getPassword());
-        user.setFirstName(entity.getFirstName());
-        user.setLastName(entity.getLastName());
-        user.setDocumentId(entity.getDocumentId());
-        user.setEmail(entity.getEmail());
-        user.setBirthDate(entity.getBirthDate());
-        user.setGender(entity.getGender());
-        user.setAddress(entity.getAddress());
-        user.setPhoneNumber(entity.getPhoneNumber());
+        Employee employee = new Employee();
+        employee.setId(entity.getId());
+        employee.setRole(parseRole(entity.getRole()));
+        employee.setUserName(entity.getUserName());
+        employee.setPassword(entity.getPassword());
+        employee.setFirstName(entity.getFirstName());
+        employee.setLastName(entity.getLastName());
+        employee.setDocumentId(entity.getDocumentId());
+        employee.setEmail(entity.getEmail());
+        employee.setBirthDate(entity.getBirthDate());
+        employee.setGender(entity.getGender());
+        employee.setAddress(entity.getAddress());
+        employee.setPhoneNumber(entity.getPhoneNumber());
 
-        return user;
+        return employee;
     }
 
     private static Role parseRole(String role) {

@@ -1,4 +1,4 @@
-package app.controllers.interceptors;
+package app.adapter.in.rest.controllers.interceptors;
 
 import app.application.exceptions.BusinessException;
 import app.application.exceptions.InputsException;

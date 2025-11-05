@@ -5,18 +5,21 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     
-    @Autowired
-    private AuthenticationPort authenticationPort;
+    private final AuthenticationPort authenticationPort;
+
+    public JwtAuthenticationFilter(AuthenticationPort authenticationPort) {
+        this.authenticationPort = authenticationPort;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, 
@@ -44,27 +47,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String username = authenticationPort.extractUsername(token);
             String role = authenticationPort.extractRole(token);
 
-            if (role == null || role.trim().isEmpty()) {
-                return; // no role -> no authentication
-            }
+            if (username != null && role != null && !role.trim().isEmpty()) {
+                String normalizedRole = role.trim().toUpperCase();
+                if (!normalizedRole.startsWith("ROLE_")) {
+                    normalizedRole = "ROLE_" + normalizedRole;
+                }
 
-            String normalized = role.trim();
-            if (!normalized.toUpperCase().startsWith("ROLE_")) {
-                normalized = "ROLE_" + normalized.toUpperCase();
-            } else {
-                normalized = normalized.toUpperCase();
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority(normalizedRole));
+                
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                    username, 
+                    null, 
+                    authorities
+                );
+                
+                SecurityContextHolder.getContext().setAuthentication(auth);
             }
-
-            ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(normalized));
-            
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                username, 
-                null, 
-                authorities
-            );
-            
-            SecurityContextHolder.getContext().setAuthentication(auth);
         }
     }
 }

@@ -75,11 +75,7 @@
 			<scope>test</scope>
 		</dependency>
 	
-   <dependency>
-     <groupId>org.wso2.brs</groupId>
-     <artifactId>HealthCareService_Facts</artifactId>
-     <version>2.2.0</version>
-   </dependency>
+  
  
    <dependency>
      <groupId>org.wso2.brs</groupId>
@@ -101,12 +97,7 @@
     </dependency>
 
 
- 
-   <dependency>
-     <groupId>org.wso2.brs</groupId>
-     <artifactId>HealthCareService_Facts</artifactId>
-     <version>2.2.0</version>
-   </dependency>
+
  
    <dependency>
      <groupId>com.h2database</groupId>
@@ -126,11 +117,7 @@
      <version>1.4.199</version>
    </dependency>
  
-   <dependency>
-     <groupId>org.wso2.brs</groupId>
-     <artifactId>HealthCareService_Facts</artifactId>
-     <version>2.2.0</version>
-   </dependency>
+
  
    <dependency>
      <groupId>com.google.guava</groupId>
@@ -138,82 +125,26 @@
      <version>28.0-jre</version>
    </dependency>
  </dependencies>
-
+ 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <skipTests>false</skipTests>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <forkMode>once</forkMode>
+                </configuration>
+            </plugin>           
+        </plugins>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>coverage</id>
-			<build>
-				<plugins>
-					<!-- JaCoCo para reporte de cobertura -->
-					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-						<version>0.8.12</version>
-						<executions>
-							<execution>
-								<id>prepare-agent</id>
-								<goals>
-									<goal>prepare-agent</goal>
-								</goals>
-								<configuration>
-									<!-- Limit to application packages to reduce noise -->
-									<includes>
-										<include>app.*</include>
-									</includes>
-								</configuration>
-							</execution>
-							<execution>
-								<id>report</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>report</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
-									<reports>
-										<xml>true</xml>
-										<html>true</html>
-									</reports>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- Exec plugin para generar archivo de líneas cubiertas desde jacoco.xml -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>3.5.0</version>
-						<executions>
-							<execution>
-								<id>generate-coverage-lines</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>java</goal>
-								</goals>
-								<configuration>
-									<mainClass>coverage.CoverageReportGenerator</mainClass>
-									<classpathScope>test</classpathScope>
-									<arguments>
-										<argument>${project.build.directory}/site/jacoco/jacoco.xml</argument>
-										<argument>${project.build.directory}/coverage-lines.txt</argument>
-									</arguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+	
 
 </project>

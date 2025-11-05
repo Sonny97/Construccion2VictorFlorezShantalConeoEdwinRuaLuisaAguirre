@@ -7,35 +7,39 @@ import org.springframework.stereotype.Component;
 
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.Employee;
+import app.domain.model.emuns.Role;
 
-public class UserBuilder {
+@Component
+public class EmployeeBuilder {
 
     @Autowired
     private UserValidator userValidator;
 
     public Employee build(
-            String userName,        
+            String userName,
             String password, 
             String firstName, 
             String lastName, 
             String email, 
-            long documentId,        
-            LocalDate birthDate,    
+            long documentId, 
+            LocalDate birthDate, 
             String gender,
             String address, 
-            int phoneNumber
+            int phoneNumber,
+            Role role 
     ) throws Exception {
         Employee employee = new Employee();
-        employee.setUserName(userValidator.userNameValidator(userName));
+         employee.setUserName(userValidator.userNameValidator(userName));
         employee.setPassword(userValidator.passwordValidator(password));
         employee.setFirstName(userValidator.nameValidator(firstName));
         employee.setLastName(userValidator.lastNameValidator(lastName));
-        employee.setDocumentId(documentId);
         employee.setEmail(userValidator.emailValidator(email));
-        employee.setGender(userValidator.genderValidator(gender));
+        employee.setDocumentId(documentId);
         employee.setBirthDate(birthDate);
+        employee.setGender(userValidator.genderValidator(gender));
         employee.setAddress(userValidator.addressValidator(address));
-        employee.setPhoneNumber(phoneNumber); 
+        employee.setPhoneNumber(phoneNumber);
+        employee.setRole(role);
         return employee;
     }
 }
