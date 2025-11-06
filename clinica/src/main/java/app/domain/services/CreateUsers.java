@@ -12,7 +12,7 @@ import app.domain.model.Employee;
 
 import app.domain.ports.UserPort;
 
-
+@Service
 public class CreateUsers {
     
     @Autowired

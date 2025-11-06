@@ -18,7 +18,7 @@ public class UserAdapter implements UserPort{
 
     @Override
 	public Employee findByDocument(Employee employee) throws Exception {
-		UserEntity userEntity = userRepository.findByDocument(employee.getDocumentId());
+		UserEntity userEntity = userRepository.findByDocumentId(employee.getDocumentId());
 		return UserMapper.toDomain(userEntity);
 	}
 

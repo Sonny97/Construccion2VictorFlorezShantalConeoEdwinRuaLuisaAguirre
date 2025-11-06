@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.Employee;
 
+@Component
 public class UserBuilder {
 
     @Autowired

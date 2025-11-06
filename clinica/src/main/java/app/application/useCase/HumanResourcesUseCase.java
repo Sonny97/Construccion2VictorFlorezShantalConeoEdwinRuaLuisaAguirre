@@ -10,7 +10,7 @@ import app.domain.services.DeleteUsers;
 import app.domain.services.ListUsersService;
 import java.util.List;
 
-
+@Service
 public class HumanResourcesUseCase {
     
     @Autowired
