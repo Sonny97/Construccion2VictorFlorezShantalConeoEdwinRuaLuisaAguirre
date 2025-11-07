@@ -2,7 +2,7 @@ package app.domain.model;
 
 import java.time.LocalDate;
 
-public class Patient extends Person{
+public class Patient extends Employee{
     private Long id;
     private String firstName;
     private String lastName;
@@ -17,7 +17,7 @@ public class Patient extends Person{
     private MedicalRegister medicalRegister [];
 
     private String userName;
-private String password;
+    private String password;
 
 public String getUserName() {
     return userName;

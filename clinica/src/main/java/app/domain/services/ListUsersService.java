@@ -10,13 +10,15 @@ import app.infrastructure.persistence.repository.UserRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import app.infrastructure.persistence.mapper.UserMapper;
-import app.domain.model.User;
+import app.domain.model.Employee;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ListUsersService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> listAllUsers() {
+    public List<Employee> listAllUsers() {
         List<UserEntity> userEntities = userRepository.findAll();
         
         return userEntities.stream()
