@@ -1,8 +1,4 @@
 package app.domain.services;
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/Luisa-Aguirre
 import app.domain.model.Visit;
 import java.util.ArrayList;
 import java.util.List;
