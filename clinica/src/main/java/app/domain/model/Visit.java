@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Visit {
     private Date visitDate;
-    private User nurse;
+    private Employee nurse;
     private int respiratoryRate;
 
     private int id;
@@ -32,7 +32,7 @@ public class Visit {
 
     // Setters nuevos
     public void setVisitDate(Date visitDate) { this.visitDate = visitDate; }
-    public void setNurse(User nurse) { this.nurse = nurse; }
+    public void setNurse(Employee nurse) { this.nurse = nurse; }
     public void setRespiratoryRate(int respiratoryRate) { this.respiratoryRate = respiratoryRate; }
 
     // Getters
@@ -49,6 +49,6 @@ public class Visit {
 
     // Getters nuevos
     public Date getVisitDate() { return visitDate; }
-    public User getNurse() { return nurse; }
+    public Employee getNurse() { return nurse; }
     public int getRespiratoryRate() { return respiratoryRate; }
 }

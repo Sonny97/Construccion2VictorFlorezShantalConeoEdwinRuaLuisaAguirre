@@ -1,24 +1,33 @@
 package app.domain.services;
 
-import app.domain.ports.UserPort;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import app.application.exceptions.BusinessException;
 
-import app.domain.model.User;
 
+
+import app.domain.model.Employee;
+
+import app.domain.ports.UserPort;
+
+@Service
 public class CreateUsers {
     
     @Autowired
     private UserPort userPort;
 
-    public void create(User user) throws Exception {
-        if (userPort.findByDocument(user) != null) {
-			throw new Exception("ya existe una persona registrada con esa cedula");
-		}
-
-		if (userPort.findByUserName(user) != null) {
-			throw new Exception("ya existe una persona registrada con ese nombre de usuario");
-		}
-        userPort.save(user);
+    public void create(Employee employee) throws Exception {
+    // Usar los métodos corregidos
+    if (userPort.findByDocument(employee.getDocumentId()) != null) {
+        throw new Exception("Ya existe una persona registrada con esa cédula: " + employee.getDocumentId());
     }
+
+    if (userPort.findByUserName(employee.getUserName()) != null) {
+        throw new Exception("Ya existe una persona registrada con ese nombre de usuario: " + employee.getUserName());
+    }
+    
+    userPort.save(employee);
+}
 }

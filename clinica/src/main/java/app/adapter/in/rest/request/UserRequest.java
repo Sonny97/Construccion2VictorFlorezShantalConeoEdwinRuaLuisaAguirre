@@ -1,57 +1,24 @@
-package app.infrastructure.persistence.entities;
+package app.adapter.in.rest.request;
 
 import java.time.LocalDate;
 
 import app.domain.model.emuns.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "users")
-public class UserEntity {
+public class UserRequest {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-	private Long id;
-
-	@Column(nullable = false, length = 50)
-	private String role;
-
-	@Column(nullable = false, length = 50)
-	private String userName;
-
-	@Column(nullable = false)
-	private String password;
-
-	@Column(nullable = false, length = 100)
+	private long id;
+	public String userName;
+	public String password;
 	private String firstName;
-
-	@Column(nullable = false, length = 100)
 	private String lastName;
-
-	@Column(unique = true)
-	private Long documentId;
-
-	@Column(nullable = false, length = 100)
 	private String email;
-
-	@Column
+	private long documentId;
 	private LocalDate birthDate;
-
-	@Column(nullable = false, length = 100)
 	private String gender;
-
-	@Column(nullable = false, length = 100)
 	private String address;
-
-	@Column(nullable = false)
 	private String phoneNumber;
+	private Role role;
 
-	// Getters y Setters
 	public Long getId() {
 		return id;
 	}
@@ -60,26 +27,15 @@ public class UserEntity {
 		this.id = id;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -100,20 +56,20 @@ public class UserEntity {
 		this.lastName = lastName;
 	}
 
-	public long getDocumentId() {
-		return documentId;
-	}
-
-	public void setDocumentId(long documentId) {
-		this.documentId = documentId;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public long getDocumentId() {
+		return documentId;
+	}
+
+	public void setDocumentId(long documentId) {
+		this.documentId = documentId;
 	}
 
 	public LocalDate getBirthDate() {
@@ -148,4 +104,11 @@ public class UserEntity {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 }
