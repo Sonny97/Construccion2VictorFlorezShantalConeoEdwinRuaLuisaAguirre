@@ -44,7 +44,7 @@ public class EnfermeraEntity {
     private String address;
 
     @Column(nullable = false)
-    private int phoneNumber;
+    private String phoneNumber;
 
     // Getters y setters
 
@@ -128,11 +128,11 @@ public class EnfermeraEntity {
         this.address = address;
     }
  
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
  
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

@@ -12,15 +12,15 @@ import java.util.List;
 
 @Service
 public class HumanResourcesUseCase {
-    
+
     @Autowired
     private CreateUsers createService;
 
     @Autowired
     private DeleteUsers deleteService;
-    
+
     @Autowired
-    private ListUsersService listService; 
+    private ListUsersService listService;
 
     // CREAR EMPLEADO CON ROL ESPECÍFICO
     public void createEmployee(Employee employee, Role role) throws Exception {
@@ -48,10 +48,18 @@ public class HumanResourcesUseCase {
         createEmployee(employee, Role.HUMAN_RESOURCES);
     }
 
+    // Eliminar por ID (NUEVO método)
+    public void deleteUserById(Long id) throws Exception {
+        System.out.println("🔍 UseCase - Deleting by ID: " + id);
+        deleteService.deleteById(id);
+    }
+
+    // Eliminar por username (método existente, ahora mejorado)
     public void deleteUser(String username) throws Exception {
+        System.out.println("🔍 UseCase - Deleting by username: " + username);
         deleteService.deleteByUsername(username);
     }
-    
+
     public List<Employee> listAllEmployees() throws Exception {
         return listService.listAllUsers();
     }

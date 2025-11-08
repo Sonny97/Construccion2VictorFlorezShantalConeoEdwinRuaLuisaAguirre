@@ -10,14 +10,34 @@ public class DeleteUsers {
 
     @Autowired
     private UserPort userPort;
-    
-    public void deleteByUsername(String username) throws Exception {
-        Employee employee = new Employee();
-        employee.setUserName(username);
-        
-        if (userPort.findByUserName(employee) == null) {
-            throw new Exception("Usuario no encontrado, revisa el dato que digitaste: " + username);
+
+    // Método principal - por ID (RECOMENDADO)
+    public void deleteById(Long id) throws Exception {
+        System.out.println("🗑️ DeleteUsers - ID: " + id);
+
+        Employee employee = userPort.findById(id);
+        System.out.println("🔍 Employee found: " + (employee != null ? employee.getUserName() : "NULL"));
+
+        if (employee == null) {
+            throw new Exception("Usuario no encontrado con ID: " + id);
         }
-        userPort.delete(employee);
+
+        userPort.deleteById(id);
+        System.out.println("✅ Delete completed for ID: " + id);
+    }
+
+    // Método por username (alternativo, menos seguro)
+    public void deleteByUsername(String username) throws Exception {
+        System.out.println("🗑️ DeleteUsers - Username: " + username);
+
+        Employee employee = userPort.findByUserName(username);
+        System.out.println("🔍 Employee found: " + (employee != null ? "ID: " + employee.getId() : "NULL"));
+
+        if (employee == null) {
+            throw new Exception("Usuario no encontrado: " + username);
+        }
+
+        userPort.deleteById(employee.getId());
+        System.out.println("✅ Delete completed for username: " + username);
     }
 }

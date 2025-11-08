@@ -96,7 +96,7 @@
 //         String address = scanner.nextLine();
 
 //         System.out.print("Ingrese teléfono (número): ");
-//         int phoneNumber = Integer.parseInt(scanner.nextLine());
+//         String phoneNumber = Integer.parseInt(scanner.nextLine());
 //         Patient patient = new Patient(firstName, lastName, email, documentId, birthDate, gender, address, phoneNumber);
 //         return patient
 //     }

@@ -24,7 +24,7 @@ public class UserBuilder {
             LocalDate birthDate,    
             String gender,
             String address, 
-            int phoneNumber
+            String phoneNumber
     ) throws Exception {
         Employee employee = new Employee();
         employee.setUserName(userValidator.userNameValidator(userName));

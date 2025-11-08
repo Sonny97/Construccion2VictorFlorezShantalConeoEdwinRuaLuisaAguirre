@@ -26,12 +26,31 @@ public class HumanResourcesController {
     @Autowired
     private EmployeeRestMapper employeeRestMapper;
 
+    // Endpoint de debug
+    @GetMapping("/debug")
+    public String debug() {
+        return "Controller is working!";
+    }
+
     // CREAR MÉDICO
     @PostMapping("/medics")
     public ResponseEntity<EmployeeResponse> createMedic(@RequestBody EmployeeRequest request) throws Exception {
-        Employee employee = employeeRestMapper.toDomain(request);
-        humanResourcesUseCase.createMedic(employee);
-        return new ResponseEntity<>(employeeRestMapper.toResponse(employee), HttpStatus.CREATED);
+        System.out.println("🎯 ENTRY POINT HIT - CREATE MEDIC");
+
+        try {
+            System.out.println("📦 Request received - Username: " + request.getUserName());
+
+            Employee employee = employeeRestMapper.toDomain(request);
+            humanResourcesUseCase.createMedic(employee);
+
+            System.out.println("✅ SUCCESS - Medic created");
+            return new ResponseEntity<>(employeeRestMapper.toResponse(employee), HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            System.out.println("❌ ERROR: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     // CREAR ENFERMERA
@@ -44,7 +63,8 @@ public class HumanResourcesController {
 
     // CREAR ADMINISTRATIVO
     @PostMapping("/administrative")
-    public ResponseEntity<EmployeeResponse> createAdministrative(@RequestBody EmployeeRequest request) throws Exception {
+    public ResponseEntity<EmployeeResponse> createAdministrative(@RequestBody EmployeeRequest request)
+            throws Exception {
         Employee employee = employeeRestMapper.toDomain(request);
         humanResourcesUseCase.createAdministrative(employee);
         return new ResponseEntity<>(employeeRestMapper.toResponse(employee), HttpStatus.CREATED);
@@ -52,15 +72,27 @@ public class HumanResourcesController {
 
     // CREAR USUARIO DE RH
     @PostMapping("/human-resources")
-    public ResponseEntity<EmployeeResponse> createHumanResources(@RequestBody EmployeeRequest request) throws Exception {
+    public ResponseEntity<EmployeeResponse> createHumanResources(@RequestBody EmployeeRequest request)
+            throws Exception {
         Employee employee = employeeRestMapper.toDomain(request);
         humanResourcesUseCase.createHumanResources(employee);
         return new ResponseEntity<>(employeeRestMapper.toResponse(employee), HttpStatus.CREATED);
     }
 
-    // ELIMINAR USUARIO
-    @DeleteMapping("/employees/{username}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String username) throws Exception {
+    // ELIMINAR USUARIO POR ID - path más específico
+    @DeleteMapping("/employees/id/{id}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteUserById(@PathVariable Long id) throws Exception {
+        System.out.println("🎯 DELETE by ID endpoint hit - ID: " + id);
+        humanResourcesUseCase.deleteUserById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // ELIMINAR USUARIO POR USERNAME - path más específico
+    @DeleteMapping("/employees/username/{username}")
+    @ResponseBody
+    public ResponseEntity<Void> deleteUserByUsername(@PathVariable String username) throws Exception {
+        System.out.println("🎯 DELETE by username endpoint hit - Username: " + username);
         humanResourcesUseCase.deleteUser(username);
         return ResponseEntity.noContent().build();
     }
@@ -75,5 +107,4 @@ public class HumanResourcesController {
         return ResponseEntity.ok(response);
     }
 
-    
 }

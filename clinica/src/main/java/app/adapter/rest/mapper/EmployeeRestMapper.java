@@ -26,7 +26,7 @@ public class EmployeeRestMapper {
             req.getGender(),
             req.getAddress(),
             req.getPhoneNumber(),
-            Role.valueOf(req.getRole().toUpperCase()) // Convierte String a Enum
+            null
         );
     }
 

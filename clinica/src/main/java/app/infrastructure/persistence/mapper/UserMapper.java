@@ -7,8 +7,8 @@ import app.infrastructure.persistence.entities.UserEntity;
 public class UserMapper {
     public static UserEntity toEntity(Employee employee) {
         if (employee == null) return null;
-        UserEntity entity = new UserEntity();
-        entity.setId(employee.getId());
+        UserEntity entity = new UserEntity();//
+        //entity.setId(employee.getId());
         entity.setRole(employee.getRole().name());
         entity.setUserName(employee.getUserName());
         entity.setPassword(employee.getPassword());

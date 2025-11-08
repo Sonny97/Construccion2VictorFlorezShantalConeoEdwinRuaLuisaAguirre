@@ -16,9 +16,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody AuthCredentials credentials) {
-        // Por ahora usamos rol fijo "HUMAN_RESOURCES" para probar
-        // Luego puedes obtener el rol de la base de datos según el usuario
+        
+        System.out.println("🔐 Login attempt for: " + credentials.getUsername());
+        
         TokenResponse response = authenticationPort.authenticate(credentials, "HUMAN_RESOURCES");
+        System.out.println("✅ Token generated for role: HUMAN_RESOURCES");
         return ResponseEntity.ok(response);
     }
 

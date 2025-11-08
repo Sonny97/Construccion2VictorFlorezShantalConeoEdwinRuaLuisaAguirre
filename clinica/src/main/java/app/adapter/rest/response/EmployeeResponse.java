@@ -13,7 +13,7 @@ public class EmployeeResponse {
     private LocalDate birthDate;
     private String gender;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
     private String role;
 
     // Getters and Setters
@@ -47,8 +47,8 @@ public class EmployeeResponse {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public int getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
