@@ -38,13 +38,21 @@ public class UserAdapter implements UserPort {
 		userRepository.save(UserMapper.toEntity(employee));
 	}
 
+	@Override
 	public void deleteById(Long id) throws Exception {
-		System.out.println("🗑️ DELETE by ID: " + id);
+		System.out.println("🗑️ UserAdapter - DELETE by ID: " + id);
+
 		if (id == null) {
 			throw new Exception("ID cannot be null for deletion");
 		}
+
+		// Verificar que el usuario existe antes de eliminar
+		if (!userRepository.existsById(id)) {
+			throw new Exception("Usuario no encontrado con ID: " + id);
+		}
+
 		userRepository.deleteById(id);
-		System.out.println("✅ Repository.deleteById() completed for ID: " + id);
+		System.out.println("✅ UserAdapter - Delete completed for ID: " + id);
 	}
 
 	@Override

@@ -13,17 +13,21 @@ public class DeleteUsers {
 
     // Método principal - por ID (RECOMENDADO)
     public void deleteById(Long id) throws Exception {
-        System.out.println("🗑️ DeleteUsers - ID: " + id);
+        System.out.println("🗑️ DeleteUsers - Starting delete for ID: " + id);
 
+        // Buscar el usuario para verificar existencia y log
         Employee employee = userPort.findById(id);
-        System.out.println("🔍 Employee found: " + (employee != null ? employee.getUserName() : "NULL"));
-
         if (employee == null) {
+            System.out.println("❌ DeleteUsers - User not found with ID: " + id);
             throw new Exception("Usuario no encontrado con ID: " + id);
         }
 
+        System.out.println("🔍 DeleteUsers - Found user: " + employee.getUserName() + " (ID: " + id + ")");
+
+        // Eliminar usando el método directo por ID
         userPort.deleteById(id);
-        System.out.println("✅ Delete completed for ID: " + id);
+
+        System.out.println("✅ DeleteUsers - Successfully deleted user: " + employee.getUserName());
     }
 
     // Método por username (alternativo, menos seguro)
