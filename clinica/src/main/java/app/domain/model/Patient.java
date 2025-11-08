@@ -10,7 +10,7 @@ public class Patient extends Employee{
     private LocalDate birthDate;
     private String gender; 
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
     private String emergencyContact;
     private String allergies;
     private String medicalConditions;
@@ -40,7 +40,7 @@ public void setPassword(String password) {
     
     public Patient(String firstName, String lastName, int documentId, 
                   LocalDate birthDate, String gender, String address, 
-                  int phoneNumber, String emergencyContact, 
+                  String phoneNumber, String emergencyContact, 
                   String allergies, String medicalConditions) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,8 +70,8 @@ public void setPassword(String password) {
     public void setGender(String gender) { this.gender = gender; }
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
-    public int getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     public String getEmergencyContact() { return emergencyContact; }
     public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
     public String getAllergies() { return allergies; }

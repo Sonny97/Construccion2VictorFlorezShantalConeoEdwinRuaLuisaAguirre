@@ -16,7 +16,7 @@ public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-	private long id;
+	private Long id;
 
 	@Column(nullable = false, length = 50)
 	private String role;
@@ -34,12 +34,12 @@ public class UserEntity {
 	private String lastName;
 
 	@Column(unique = true)
-	private long documentId;
+	private Long documentId;
 
 	@Column(nullable = false, length = 100)
 	private String email;
 
-	@Column(unique = true)
+	@Column
 	private LocalDate birthDate;
 
 	@Column(nullable = false, length = 100)
@@ -49,7 +49,7 @@ public class UserEntity {
 	private String address;
 
 	@Column(nullable = false)
-	private int phoneNumber;
+	private String phoneNumber;
 
 	// Getters y Setters
 	public Long getId() {
@@ -140,11 +140,11 @@ public class UserEntity {
 		this.address = address;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

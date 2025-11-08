@@ -14,7 +14,7 @@ public class Employee {
     private LocalDate birthDate;
     private String gender;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
     private Role role; // Usa el enum Role
 
     // Constructors
@@ -22,7 +22,7 @@ public class Employee {
 
     public Employee(String userName, String password, String firstName, String lastName, 
                    String email, long documentId, LocalDate birthDate, String gender, 
-                   String address, int phoneNumber, Role role) {
+                   String address, String phoneNumber, Role role) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
@@ -67,8 +67,8 @@ public class Employee {
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
     
-    public int getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }

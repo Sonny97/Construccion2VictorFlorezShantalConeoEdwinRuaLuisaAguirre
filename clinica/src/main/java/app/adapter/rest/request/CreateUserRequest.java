@@ -13,7 +13,7 @@ public class CreateUserRequest {
     private LocalDate birthDate;
     private String gender;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
 
     public Long getId() {
         return id;
@@ -92,11 +92,11 @@ public class CreateUserRequest {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

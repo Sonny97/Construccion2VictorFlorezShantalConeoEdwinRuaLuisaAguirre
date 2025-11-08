@@ -17,19 +17,18 @@ public class EmployeeBuilder {
 
     public Employee build(
             String userName,
-            String password, 
-            String firstName, 
-            String lastName, 
-            String email, 
-            long documentId, 
-            LocalDate birthDate, 
+            String password,
+            String firstName,
+            String lastName,
+            String email,
+            long documentId,
+            LocalDate birthDate,
             String gender,
-            String address, 
-            int phoneNumber,
-            Role role 
-    ) throws Exception {
+            String address,
+            String phoneNumber,
+            Role role) throws Exception {
         Employee employee = new Employee();
-         employee.setUserName(userValidator.userNameValidator(userName));
+        employee.setUserName(userValidator.userNameValidator(userName));
         employee.setPassword(userValidator.passwordValidator(password));
         employee.setFirstName(userValidator.nameValidator(firstName));
         employee.setLastName(userValidator.lastNameValidator(lastName));
@@ -39,7 +38,9 @@ public class EmployeeBuilder {
         employee.setGender(userValidator.genderValidator(gender));
         employee.setAddress(userValidator.addressValidator(address));
         employee.setPhoneNumber(phoneNumber);
-        employee.setRole(role);
+        if (role != null) {
+            employee.setRole(role);
+        }
         return employee;
     }
 }

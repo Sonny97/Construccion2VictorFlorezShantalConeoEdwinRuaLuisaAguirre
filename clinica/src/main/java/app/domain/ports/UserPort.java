@@ -3,8 +3,10 @@ package app.domain.ports;
 import app.domain.model.Employee;
 
 public interface UserPort {
-	public Employee findByDocument(Employee employee) throws Exception;
-	public Employee findByUserName(Employee employee) throws Exception;
-	public void save(Employee employee) throws Exception;
-	public void delete(Employee employee) throws Exception;
+    Employee findByDocument(Long documentId) throws Exception;
+    Employee findByUserName(String userName) throws Exception; // Cambiado a String
+    Employee findById(Long id) throws Exception;
+    void save(Employee employee) throws Exception;
+	void deleteById(Long id) throws Exception;
+    void delete(Employee employee) throws Exception;
 }

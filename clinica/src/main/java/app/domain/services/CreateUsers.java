@@ -19,13 +19,15 @@ public class CreateUsers {
     private UserPort userPort;
 
     public void create(Employee employee) throws Exception {
-        if (userPort.findByDocument(employee) != null) {
-			throw new Exception("ya existe una persona registrada con esa cedula");
-		}
-
-		if (userPort.findByUserName(employee) != null) {
-			throw new Exception("ya existe una persona registrada con ese nombre de usuario");
-		}
-        userPort.save(employee);
+    // Usar los métodos corregidos
+    if (userPort.findByDocument(employee.getDocumentId()) != null) {
+        throw new Exception("Ya existe una persona registrada con esa cédula: " + employee.getDocumentId());
     }
+
+    if (userPort.findByUserName(employee.getUserName()) != null) {
+        throw new Exception("Ya existe una persona registrada con ese nombre de usuario: " + employee.getUserName());
+    }
+    
+    userPort.save(employee);
+}
 }

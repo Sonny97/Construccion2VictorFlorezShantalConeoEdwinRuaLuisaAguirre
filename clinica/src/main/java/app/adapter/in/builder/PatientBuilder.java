@@ -10,7 +10,7 @@ public class PatientBuilder {
     private UserValidator userValidator;
 
     public Employee build(String firstName, String lastName, String email, int documentId, String birthDate, String gender,
-            String address, int phoneNumber) throws Exception {
+            String address, String phoneNumber) throws Exception {
         Employee employee = new Employee();
         employee.setFirstName(userValidator.nameValidator(firstName));
         employee.setLastName(userValidator.lastNameValidator(lastName));
