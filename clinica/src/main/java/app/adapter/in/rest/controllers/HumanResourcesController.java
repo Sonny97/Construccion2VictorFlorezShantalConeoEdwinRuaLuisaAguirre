@@ -26,11 +26,7 @@ public class HumanResourcesController {
     @Autowired
     private EmployeeRestMapper employeeRestMapper;
 
-    // Endpoint de debug
-    @GetMapping("/debug")
-    public String debug() {
-        return "Controller is working!";
-    }
+    
 
     // CREAR MÉDICO
     @PostMapping("/medics")
