@@ -5,7 +5,7 @@ import app.domain.model.emuns.Role;
 
 public class TokenResponse {
     private String token;
-    private String role;
+    
     
 
     public String getToken() {

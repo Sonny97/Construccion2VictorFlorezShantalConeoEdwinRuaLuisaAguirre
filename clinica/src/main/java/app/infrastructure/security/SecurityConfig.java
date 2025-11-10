@@ -22,7 +22,7 @@
          http
              .csrf().disable()
              .authorizeHttpRequests()
-                 .requestMatchers("/api/auth/**").permitAll()
+                 .requestMatchers("/api/auth/login/**").permitAll()
                  .requestMatchers("/api/rh/**").hasRole("HUMAN_RESOURCES")
                  .requestMatchers("/api/medic/**").hasRole("MEDIC")
                  .requestMatchers("/api/nurse/**").hasRole("NURSE")
