@@ -4,7 +4,7 @@ import app.domain.model.auth.AuthCredentials;
 import app.adapter.rest.mapper.AuthRestMapper;
 import app.adapter.rest.request.AuthRequest;
 import app.adapter.rest.response.TokenResponseDto;
-import app.application.useCase.LoginUseCase;
+import app.application.usecase.LoginUseCase;
 import app.domain.model.auth.TokenResponse;
 import app.domain.ports.AuthenticationPort;
 import org.springframework.beans.factory.annotation.Autowired;

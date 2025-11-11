@@ -3,7 +3,7 @@ package app.adapter.in.rest.controllers;
 import app.adapter.rest.mapper.PatientRestMapper;
 import app.adapter.rest.request.PatientRequest;
 import app.adapter.rest.response.PatientResponse;
-import app.application.useCase.PatientUseCase;
+import app.application.usecase.PatientUseCase;
 import app.domain.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

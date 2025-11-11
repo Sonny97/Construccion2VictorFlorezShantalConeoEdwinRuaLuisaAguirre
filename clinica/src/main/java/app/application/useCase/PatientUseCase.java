@@ -1,4 +1,4 @@
-package app.application.useCase;
+package app.application.usecase;
 
 import app.domain.model.Patient;
 import app.domain.services.CreatePatient;

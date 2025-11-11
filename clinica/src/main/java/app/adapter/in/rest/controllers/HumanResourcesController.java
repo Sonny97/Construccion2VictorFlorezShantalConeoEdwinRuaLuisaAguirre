@@ -3,7 +3,7 @@ package app.adapter.in.rest.controllers;
 import app.adapter.rest.mapper.EmployeeRestMapper;
 import app.adapter.rest.request.EmployeeRequest;
 import app.adapter.rest.response.EmployeeResponse;
-import app.application.useCase.HumanResourcesUseCase;
+import app.application.usecase.HumanResourcesUseCase;
 import app.domain.model.Employee;
 import app.domain.model.emuns.Role;
 import org.springframework.beans.factory.annotation.Autowired;

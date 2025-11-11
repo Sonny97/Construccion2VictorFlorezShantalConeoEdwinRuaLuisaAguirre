@@ -1,4 +1,4 @@
-package app.application.useCase;
+package app.application.usecase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
