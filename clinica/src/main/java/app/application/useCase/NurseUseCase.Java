@@ -1,3 +1,5 @@
+package app.application.usecase;
+
 public class NurseUseCase {
     private VisitService visitService;
     private VisitBuilder visitBuilder;

@@ -2,10 +2,10 @@ package app.adapter.in.rest.controllers;
 
 import app.adapter.rest.mapper.VisitRestMapper;
 import app.adapter.rest.mapper.ClinicalOrderRestMapper;
-import app.adapter.rest.request.VisitRequest;
+import app.adapter.rest.request.CreateVisitRequest;
 import app.adapter.rest.response.VisitResponse;
-import app.adapter.rest.response.ClinicalOrderResponse;
-import app.application.usecases.NurseUseCase;
+import app.adapter.rest.mapper.ClinicalOrderRestMapper;
+import app.application.usecase.NurseUseCase;
 import app.domain.model.Visit;
 import app.domain.model.ClinicalOrder;
 import app.domain.model.Patient;

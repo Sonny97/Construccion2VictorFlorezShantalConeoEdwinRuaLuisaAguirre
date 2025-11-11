@@ -1,21 +1,19 @@
 package app.adapter.in.builder;
+
 import app.domain.model.Visit;
+import java.time.LocalDate;
 
 public class VisitBuilder {
-    public Visit build(long patientId, long nurseId, String bloodPressure,
-                      double temperature, int pulse, double oxygenLevel,
-                      String medications, String procedures, String observations) {
+
+    public Visit build(long patientId, long nurseId, LocalDate date, String reason, String observations) {
         Visit visit = new Visit();
         visit.setPatientId(patientId);
         visit.setNurseId(nurseId);
-        visit.setBloodPressure(bloodPressure);
-        visit.setTemperature(temperature);
-        visit.setPulse(pulse);
-        visit.setOxygenLevel(oxygenLevel);
-        visit.setMedications(medications);
-        visit.setProcedures(procedures);
+        visit.setDate(date);
+        visit.setReason(reason);
         visit.setObservations(observations);
         return visit;
     }
-}
+
+} 
 

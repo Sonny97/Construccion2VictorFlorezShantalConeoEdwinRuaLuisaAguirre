@@ -2,38 +2,38 @@ package app.domain.model;
 
 import java.time.LocalDate;
 
-public class Visit {
+public class ClinicalOrder {
 
     private Long id;
     private Long patientId;
-    private Long nurseId;
+    private Long doctorId;
     private LocalDate date;
-    private String reason;
-    private String observations;
+    private String orderType;
+    private String orderDescription;
 
     // SETTERS
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
 
-    public void setNurseId(Long nurseId) {
-        this.nurseId = nurseId;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
-    public void setObservations(String observations) {
-        this.observations = observations;
+    public void setOrderDescription(String orderDescription) {
+        this.orderDescription = orderDescription;
     }
 
     // GETTERS
@@ -45,19 +45,19 @@ public class Visit {
         return patientId;
     }
 
-    public Long getNurseId() {
-        return nurseId;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public String getReason() {
-        return reason;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public String getObservations() {
-        return observations;
+    public String getOrderDescription() {
+        return orderDescription;
     }
 }

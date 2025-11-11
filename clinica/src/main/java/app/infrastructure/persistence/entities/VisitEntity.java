@@ -5,16 +5,16 @@ import java.util.Date;
 
 @Entity
 @Table(name = "visits")
-public class NurseEntity {
+public class VisitEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = false)
     private PatientEntity patient;
+    
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_id", referencedColumnName = "id", nullable = false)
