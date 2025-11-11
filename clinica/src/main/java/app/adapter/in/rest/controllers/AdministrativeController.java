@@ -1,93 +1,88 @@
-// package app.adapter.in.rest.controllers;
+package app.adapter.in.rest.controllers;
 
-// import app.adapter.rest.mapper.EmployeeRestMapper;
-// import app.adapter.rest.request.EmployeeRequest;
-// import app.adapter.rest.response.EmployeeResponse;
-// import app.application.useCase.HumanResourcesUseCase;
-// import app.domain.model.Employee;
-// //import app.adapter.rest.mapper.PatientRestMapper;
-// //import app.adapter.rest.mapper.AppointmentRestMapper;
-// //import app.adapter.rest.mapper.InvoiceRestMapper;
-// //import app.adapter.rest.mapper.EmergencyContactRestMapper;
-// //import app.adapter.rest.request.PatientRequest;
-// //import app.adapter.rest.request.AppointmentRequest;
-// //import app.adapter.rest.request.InvoiceRequest;
-// //import app.adapter.rest.request.EmergencyContactRequest;
-// //import app.adapter.rest.response.PatientResponse;
-// //import app.adapter.rest.response.AppointmentResponse;
-// //import app.adapter.rest.response.InvoiceResponse;
-// //import app.adapter.rest.response.EmergencyContactResponse;
-// //import app.application.usecases.AdministrativeUseCase;
-// import app.domain.model.Patient;
-// import app.domain.services.Appointment;
+import app.adapter.rest.mapper.PatientRestMapper;
+import app.adapter.rest.request.PatientRequest;
+import app.adapter.rest.response.PatientResponse;
+import app.application.usecase.PatientUseCase;
+import app.domain.model.Patient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-// //import app.domain.model.Appointment;
-// //import app.domain.model.Invoice;
-// //import app.domain.model.EmergencyContact;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.security.access.prepost.PreAuthorize;
-// import org.springframework.web.bind.annotation.*;
+@RestController
+@RequestMapping("/api/administrative")
+@PreAuthorize("hasRole('ADMINISTRATIVE')")
+public class AdministrativeController {
 
-// @RestController
-// @RequestMapping("/api/administrative")
-// @PreAuthorize("hasRole('ADMINISTRATIVE')")
-// public class AdministrativeController {
+    @Autowired
+    private PatientUseCase patientUseCase;
 
-//     @Autowired
-//     private HumanResourcesUseCase administrativeUseCase;
+    @Autowired
+    private PatientRestMapper patientRestMapper;
 
-//       @Autowired
-//     private EmployeeRestMapper employeeRestMapper;
+    // CREAR PACIENTE
+    @PostMapping("/patients")
+    public ResponseEntity<PatientResponse> createPatient(@RequestBody PatientRequest request) throws Exception {
+        System.out.println("🎯 CREATE PATIENT endpoint hit");
+        
+        try {
+            System.out.println("📦 Request received - Patient: " + request.getFirstName() + " " + request.getLastName());
+            
+            Patient patient = patientRestMapper.toDomain(request);
+            Patient savedPatient = patientUseCase.registerPatient(patient);
+            
+            System.out.println("✅ Patient created successfully - ID: " + savedPatient.getId());
+            return new ResponseEntity<>(patientRestMapper.toResponse(savedPatient), HttpStatus.CREATED);
+            
+        } catch (Exception e) {
+            System.out.println("❌ ERROR creating patient: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
-//     @Autowired
-//     //private PatientRestMapper patientRestMapper;
+    // ACTUALIZAR PACIENTE
+    @PutMapping("/patients/{id}")
+    public ResponseEntity<PatientResponse> updatePatient(@PathVariable Long id, @RequestBody PatientRequest request) throws Exception {
+        System.out.println("🎯 UPDATE PATIENT endpoint hit - ID: " + id);
+        
+        try {
+            Patient patient = patientRestMapper.toDomain(request);
+            patient.setId(id);
+            
+            patientUseCase.updatePatient(patient);
+            
+            System.out.println("✅ Patient updated successfully - ID: " + id);
+            return ResponseEntity.ok(patientRestMapper.toResponse(patient));
+            
+        } catch (Exception e) {
+            System.out.println("❌ ERROR updating patient: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
-//     //@Autowired
-//     //private AppointmentRestMapper appointmentRestMapper;
-// //
-//     //@Autowired
-//     //private InvoiceRestMapper invoiceRestMapper;
-// //
-//     //@Autowired
-//     //private EmergencyContactRestMapper emergencyContactRestMapper;
+    // BUSCAR PACIENTE POR DOCUMENTO
+    @GetMapping("/patients/document/{documentId}")
+    public ResponseEntity<PatientResponse> getPatientByDocument(@PathVariable Long documentId) throws Exception {
+        System.out.println("🎯 GET PATIENT BY DOCUMENT endpoint hit - Document: " + documentId);
+        
+        Patient patient = patientUseCase.findPatientByIdNumber(documentId);
+        if (patient == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(patientRestMapper.toResponse(patient));
+    }
 
-   
-
-//     @PostMapping("/patients")
-//     public ResponseEntity<PatientResponse> createPatient(@RequestBody PatientRequest request) throws Exception {
-//         Patient patient = patientRestMapper.toDomain(request);
-//         administrativeUseCase.createPatient(patient);
-//         return new ResponseEntity<>(patientRestMapper.toResponse(patient), HttpStatus.CREATED);
-//     }
-
-//     @PutMapping("/patients/{id}")
-//     public ResponseEntity<PatientResponse> updatePatient(@PathVariable String id, @RequestBody PatientRequest request) throws Exception {
-//         Patient patient = patientRestMapper.toDomain(request);
-//         patient.setId(Long.parseLong(id));
-//         administrativeUseCase.updatePatient(patient);
-//         return ResponseEntity.ok(patientRestMapper.toResponse(patient));
-//     }
-
-//     @PostMapping("/appointments")
-//     public ResponseEntity<AppointmentResponse> createAppointment(@RequestBody AppointmentRequest request) throws Exception {
-//         Appointment appointment = appointmentRestMapper.toDomain(request);
-//         administrativeUseCase.createAppointment(appointment);
-//         return new ResponseEntity<>(appointmentRestMapper.toResponse(appointment), HttpStatus.CREATED);
-//     }
-
-//     @PostMapping("/invoices")
-//     public ResponseEntity<InvoiceResponse> createInvoice(@RequestBody InvoiceRequest request) throws Exception {
-//         Invoice invoice = invoiceRestMapper.toDomain(request);
-//         administrativeUseCase.createInvoice(invoice);
-//         return new ResponseEntity<>(invoiceRestMapper.toResponse(invoice), HttpStatus.CREATED);
-//     }
-
-//     @PostMapping("/emergency-contacts")
-//     public ResponseEntity<EmergencyContactResponse> createEmergencyContact(@RequestBody EmergencyContactRequest request) throws Exception {
-//         EmergencyContact emergencyContact = emergencyContactRestMapper.toDomain(request);
-//         administrativeUseCase.createEmergencyContact(emergencyContact);
-//         return new ResponseEntity<>(emergencyContactRestMapper.toResponse(emergencyContact), HttpStatus.CREATED);
-//     }
-// }
+    // BUSCAR PACIENTES POR NOMBRE
+    @GetMapping("/patients/search")
+    public ResponseEntity<?> searchPatientsByName(@RequestParam String name) throws Exception {
+        System.out.println("🎯 SEARCH PATIENTS BY NAME endpoint hit - Name: " + name);
+        
+        // Este método retornará List<Patient> - necesitamos crear el mapper para lista
+        return ResponseEntity.ok("Search functionality - to be implemented");
+    }
+}

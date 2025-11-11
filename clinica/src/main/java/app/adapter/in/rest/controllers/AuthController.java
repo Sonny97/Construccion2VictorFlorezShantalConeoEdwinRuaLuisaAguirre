@@ -1,6 +1,10 @@
 package app.adapter.in.rest.controllers;
 
 import app.domain.model.auth.AuthCredentials;
+import app.adapter.rest.mapper.AuthRestMapper;
+import app.adapter.rest.request.AuthRequest;
+import app.adapter.rest.response.TokenResponseDto;
+import app.application.usecase.LoginUseCase;
 import app.domain.model.auth.TokenResponse;
 import app.domain.ports.AuthenticationPort;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,25 +14,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
+    
     @Autowired
-    private AuthenticationPort authenticationPort;
+    private AuthRestMapper authRestMapper;
+    
+    @Autowired
+    private LoginUseCase loginUseCase;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> login(@RequestBody AuthCredentials credentials) {
-        
-        System.out.println("🔐 Login attempt for: " + credentials.getUsername());
-        
-        TokenResponse response = authenticationPort.authenticate(credentials, "HUMAN_RESOURCES");
-        System.out.println("✅ Token generated for role: HUMAN_RESOURCES");
-        return ResponseEntity.ok(response);
+    public ResponseEntity<TokenResponseDto> login(@RequestBody AuthRequest request) throws Exception {
+
+        AuthCredentials credentials = authRestMapper.toDomain(request);
+        System.out.println(" Login attempt for: " + credentials.getUsername());
+
+        TokenResponse token = loginUseCase.login(credentials);
+        System.out.println(" Token generated  ");
+        return ResponseEntity.ok(authRestMapper.toResponse(token));
     }
 
-    @PostMapping("/login/{role}")
-    public ResponseEntity<TokenResponse> loginWithRole(
-            @RequestBody AuthCredentials credentials, 
-            @PathVariable String role) {
-        TokenResponse response = authenticationPort.authenticate(credentials, role);
-        return ResponseEntity.ok(response);
-    }
 }

@@ -26,7 +26,7 @@ public class AuthenticationService {
     }
 
     private Employee getUserByUsername(String username) throws Exception {
-    Employee user = userPort.findByUserName(username); // Ahora recibe String directamente
+    Employee user = userPort.findByUserName(username); 
     if (user == null) {
         throw new BusinessException("Usuario no encontrado");
     }
