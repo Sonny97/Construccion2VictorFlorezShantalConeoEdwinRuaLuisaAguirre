@@ -12,12 +12,9 @@ public class NurseMapper {
         }
         Patient patient = new Patient();
         patient.setId(entity.getId());
-        patient.setUserName(entity.getUserName());
-        patient.setPassword(entity.getPassword());
         patient.setFirstName(entity.getFirstName());
         patient.setLastName(entity.getLastName());
         patient.setDocumentId(entity.getDocumentId());
-        patient.setEmail(entity.getEmail());
         patient.setBirthDate(entity.getBirthDate());
         patient.setGender(entity.getGender());
         patient.setAddress(entity.getAddress());
@@ -33,12 +30,9 @@ public class NurseMapper {
         }
         NurseEntity entity = new NurseEntity();
         entity.setId(patient.getId());
-        entity.setUserName(patient.getUserName());
-        entity.setPassword(patient.getPassword());
         entity.setFirstName(patient.getFirstName());
         entity.setLastName(patient.getLastName());
         entity.setDocumentId(patient.getDocumentId());
-        entity.setEmail(patient.getEmail());
         entity.setBirthDate(patient.getBirthDate());
         entity.setGender(patient.getGender());
         entity.setAddress(patient.getAddress());
