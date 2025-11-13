@@ -1,6 +1,10 @@
 package app.domain.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import app.domain.services.Appointment;
 
 public class Patient {
     private Long id;
@@ -14,14 +18,14 @@ public class Patient {
     private String emergencyContact;
     private String allergies;
     private String medicalConditions;
-    // private MedicalRegister medicalRegister [];
+    // NUEVAS RELACIONES
+    private EmergencyContact detailedEmergencyContact;
+    private MedicalInsurance medicalInsurance;
+    private List<Appointment> appointments = new ArrayList<>();
+    private List<Invoice> invoices = new ArrayList<>();
 
-    // private String userName;
-    // private String password;
 
-
-    // Constructores
-    public Patient() {}
+     public Patient() {}
     
     public Patient(String firstName, String lastName, Long documentId, 
                   LocalDate birthDate, String gender, String address, 
@@ -37,7 +41,6 @@ public class Patient {
         this.emergencyContact = emergencyContact;
         this.allergies = allergies;
         this.medicalConditions = medicalConditions;
-        // this.medicalRegister = null;
     }
 
     // Getters y Setters
@@ -63,5 +66,16 @@ public class Patient {
     public void setAllergies(String allergies) { this.allergies = allergies; }
     public String getMedicalConditions() { return medicalConditions; }
     public void setMedicalConditions(String medicalConditions) { this.medicalConditions = medicalConditions; }
-    //public MedicalRegister[] getMedicalRegister() {return this.medicalRegister;}
+      // NUEVOS GETTERS Y SETTERS
+    public EmergencyContact getDetailedEmergencyContact() { return detailedEmergencyContact; }
+    public void setDetailedEmergencyContact(EmergencyContact detailedEmergencyContact) { this.detailedEmergencyContact = detailedEmergencyContact; }
+    
+    public MedicalInsurance getMedicalInsurance() { return medicalInsurance; }
+    public void setMedicalInsurance(MedicalInsurance medicalInsurance) { this.medicalInsurance = medicalInsurance; }
+    
+    public List<Appointment> getAppointments() { return appointments; }
+    public void setAppointments(List<Appointment> appointments) { this.appointments = appointments; }
+    
+    public List<Invoice> getInvoices() { return invoices; }
+    public void setInvoices(List<Invoice> invoices) { this.invoices = invoices; }
 }
