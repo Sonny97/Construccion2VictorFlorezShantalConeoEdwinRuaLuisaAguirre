@@ -1,41 +1,8 @@
-package app.adapter.rest.response;
+package app.adapter.in.rest.request;
 
-<<<<<<< HEAD
-public class VisitResponse {
-    private long id;
-    private long patientId;
-    private long nurseId;
-    private String date;
-    private String reason;
-    private String observations;
-
-    public long getId() { return id; }
-    public void setId(long id) { this.id = id; }
-
-    public long getPatientId() { return patientId; }
-    public void setPatientId(long patientId) { this.patientId = patientId; }
-
-    public long getNurseId() { return nurseId; }
-    public void setNurseId(long nurseId) { this.nurseId = nurseId; }
-
-    public String getDate() { return date; }
-    public void setDate(String date) { this.date = date; }
-
-    public String getReason() { return reason; }
-    public void setReason(String reason) { this.reason = reason; }
-
-    public String getObservations() { return observations; }
-    public void setObservations(String observations) { this.observations = observations; }
-}
-
-=======
-import java.util.Date;
-
-public class VisitResponse {
-    private Long id;
+public class VisitRequest {
     private Long patientId;
     private Long nurseId;
-    private Date visitDate;  // ← Cambiado de String date a Date visitDate
     private String bloodPressure;
     private Double temperature;
     private Integer pulse;
@@ -46,17 +13,11 @@ public class VisitResponse {
     private String observations;
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    
     public Long getPatientId() { return patientId; }
     public void setPatientId(Long patientId) { this.patientId = patientId; }
     
     public Long getNurseId() { return nurseId; }
     public void setNurseId(Long nurseId) { this.nurseId = nurseId; }
-    
-    public Date getVisitDate() { return visitDate; }  // ← CORREGIDO
-    public void setVisitDate(Date visitDate) { this.visitDate = visitDate; }
     
     public String getBloodPressure() { return bloodPressure; }
     public void setBloodPressure(String bloodPressure) { this.bloodPressure = bloodPressure; }
@@ -82,4 +43,3 @@ public class VisitResponse {
     public String getObservations() { return observations; }
     public void setObservations(String observations) { this.observations = observations; }
 }
->>>>>>> ecabbdda117d0ae81b100168f1a84e192646d5f1

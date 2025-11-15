@@ -2,6 +2,8 @@ package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -41,6 +43,19 @@ public class PatientEntity {
     @Column(length = 500)
     private String medicalConditions;
 
+    // NUEVAS RELACIONES JPA
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private EmergencyContactEntity detailedEmergencyContact;
+    
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private MedicalInsuranceEntity medicalInsurance;
+    
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AppointmentEntity> appointments = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InvoiceEntity> invoices = new ArrayList<>();
+
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -74,4 +89,6 @@ public class PatientEntity {
     
     public String getMedicalConditions() { return medicalConditions; }
     public void setMedicalConditions(String medicalConditions) { this.medicalConditions = medicalConditions; }
+    
+
 }

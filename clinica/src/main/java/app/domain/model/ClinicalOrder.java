@@ -60,4 +60,8 @@ public class ClinicalOrder {
     public String getOrderDescription() {
         return orderDescription;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ecabbdda117d0ae81b100168f1a84e192646d5f1

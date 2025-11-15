@@ -5,7 +5,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "visits")
+<<<<<<< HEAD
 public class VisitEntity {
+=======
+public class VisitEntity {  
+>>>>>>> ecabbdda117d0ae81b100168f1a84e192646d5f1
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +19,10 @@ public class VisitEntity {
     @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = false)
     private PatientEntity patient;
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> ecabbdda117d0ae81b100168f1a84e192646d5f1
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nurse_id", referencedColumnName = "id", nullable = false)
     private UserEntity nurse;
