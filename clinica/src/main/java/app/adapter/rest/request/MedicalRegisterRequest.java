@@ -1,9 +1,8 @@
-package app.domain.model;
+package app.adapter.rest.request;
 
 import java.time.LocalDateTime;
 
-public class MedicalRegister {
-    private Long id;
+public class MedicalRegisterRequest {
     private Long patientId;
     private Long medicId;
     private LocalDateTime registerDate;
@@ -15,34 +14,7 @@ public class MedicalRegister {
     private String prescriptions;
     private String observations;
 
-    // Constructors
-    public MedicalRegister() {}
-
-    public MedicalRegister(Long patientId, Long medicId, LocalDateTime registerDate,
-                          String inquiryReason, String symptoms, String physicalExam,
-                          String diagnosis, String treatment, String prescriptions, 
-                          String observations) {
-        this.patientId = patientId;
-        this.medicId = medicId;
-        this.registerDate = registerDate;
-        this.inquiryReason = inquiryReason;
-        this.symptoms = symptoms;
-        this.physicalExam = physicalExam;
-        this.diagnosis = diagnosis;
-        this.treatment = treatment;
-        this.prescriptions = prescriptions;
-        this.observations = observations;
-    }
-
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getPatientId() {
         return patientId;
     }
