@@ -1,6 +1,7 @@
 package app.adapter.rest.response;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PatientResponse {
     private Long id;
@@ -11,9 +12,13 @@ public class PatientResponse {
     private String gender;
     private String address;
     private String phoneNumber;
-    private String emergencyContact;
+    // private String emergencyContact;
     private String allergies;
     private String medicalConditions;
+     // NUEVOS CAMPOS PARA RELACIONES
+    private EmergencyContactResponse detailedEmergencyContact;
+    private MedicalInsuranceResponse medicalInsurance;
+    private List<AppointmentResponse> appointments; // ← NUEVO: Lista de citas
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -40,12 +45,20 @@ public class PatientResponse {
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     
-    public String getEmergencyContact() { return emergencyContact; }
-    public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
+    // public String getEmergencyContact() { return emergencyContact; }
+    // public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
     
     public String getAllergies() { return allergies; }
     public void setAllergies(String allergies) { this.allergies = allergies; }
     
     public String getMedicalConditions() { return medicalConditions; }
     public void setMedicalConditions(String medicalConditions) { this.medicalConditions = medicalConditions; }
+
+    // NUEVOS GETTERS Y SETTERS
+    public EmergencyContactResponse getDetailedEmergencyContact() { return detailedEmergencyContact; }
+    public void setDetailedEmergencyContact(EmergencyContactResponse detailedEmergencyContact) { this.detailedEmergencyContact = detailedEmergencyContact; }
+    public MedicalInsuranceResponse getMedicalInsurance() { return medicalInsurance; }
+    public void setMedicalInsurance(MedicalInsuranceResponse medicalInsurance) { this.medicalInsurance = medicalInsurance; }
+    public List<AppointmentResponse> getAppointments() { return appointments; }
+    public void setAppointments(List<AppointmentResponse> appointments) { this.appointments = appointments; }
 }

@@ -3,21 +3,18 @@ package app.domain.model;
 import java.util.Date;
 
 public class Visit {
-    private Date visitDate;
-    private Employee nurse;
-    private int respiratoryRate;
-
-    private int id;
+    private Integer id;
     private long patientId;
     private long nurseId;
+    private Date visitDate;  // ← Debe ser Date, no String
     private String bloodPressure;
     private double temperature;
     private int pulse;
+    private int respiratoryRate;
     private double oxygenLevel;
     private String medications;
     private String procedures;
     private String observations;
-
     
     public void setId(int id) { this.id = id; }
     public void setPatientId(long patientId) { this.patientId = patientId; }
@@ -32,9 +29,7 @@ public class Visit {
 
     // Setters nuevos
     public void setVisitDate(Date visitDate) { this.visitDate = visitDate; }
-    public void setNurse(Employee nurse) { this.nurse = nurse; }
     public void setRespiratoryRate(int respiratoryRate) { this.respiratoryRate = respiratoryRate; }
-
     // Getters
     public int getId() { return id; }
     public long getPatientId() { return patientId; }
@@ -49,6 +44,5 @@ public class Visit {
 
     // Getters nuevos
     public Date getVisitDate() { return visitDate; }
-    public Employee getNurse() { return nurse; }
     public int getRespiratoryRate() { return respiratoryRate; }
 }
