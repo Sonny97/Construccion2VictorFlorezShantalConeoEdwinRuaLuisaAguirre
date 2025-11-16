@@ -1,38 +1,45 @@
-package app.domain.model;
+package app.infrastructure.persistence.entities;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-public class MedicalRegister {
+@Entity
+@Table(name = "medical_registers")
+public class MedicalRegisterEntity {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
     private Long patientId;
+    
+    @Column(nullable = false)
     private Long medicId;
+    
+    @Column(nullable = false)
     private LocalDateTime registerDate;
+    
+    @Column(nullable = false, length = 500)
     private String inquiryReason;
+    
+    @Column(length = 1000)
     private String symptoms;
+    
+    @Column(length = 1000)
     private String physicalExam;
+    
+    @Column(length = 1000)
     private String diagnosis;
+    
+    @Column(length = 1000)
     private String treatment;
+    
+    @Column(length = 2000)
     private String prescriptions;
+    
+    @Column(length = 2000)
     private String observations;
-
-    // Constructors
-    public MedicalRegister() {}
-
-    public MedicalRegister(Long patientId, Long medicId, LocalDateTime registerDate,
-                          String inquiryReason, String symptoms, String physicalExam,
-                          String diagnosis, String treatment, String prescriptions, 
-                          String observations) {
-        this.patientId = patientId;
-        this.medicId = medicId;
-        this.registerDate = registerDate;
-        this.inquiryReason = inquiryReason;
-        this.symptoms = symptoms;
-        this.physicalExam = physicalExam;
-        this.diagnosis = diagnosis;
-        this.treatment = treatment;
-        this.prescriptions = prescriptions;
-        this.observations = observations;
-    }
 
     // Getters and Setters
     public Long getId() {
