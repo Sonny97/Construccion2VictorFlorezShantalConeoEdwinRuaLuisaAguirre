@@ -76,10 +76,10 @@ public class OrderController {
 
     /**
      * Obtener una orden por ID
-     * Roles permitidos: MEDIC, NURSE, ADMINISTRATIVE
+     * Roles permitidos: MEDIC, NURSE
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('MEDIC', 'NURSE', 'ADMINISTRATIVE')")
+    @PreAuthorize("hasAnyRole('MEDIC', 'NURSE')")
     public ResponseEntity<OrderResponse> getOrderById(@PathVariable Long id) {
         try {
             System.out.println("🎯 ENTRY POINT HIT - GET ORDER BY ID: " + id);
