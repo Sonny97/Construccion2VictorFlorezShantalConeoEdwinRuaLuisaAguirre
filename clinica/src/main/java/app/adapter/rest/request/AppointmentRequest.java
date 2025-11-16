@@ -7,7 +7,7 @@ public class AppointmentRequest {
     private String reason;
     private String notes;
     private Long patientId;
-    private Long doctorId;
+    private Long medicId; // Cambiar de doctorId a medicId
 
     // Getters and Setters
     public LocalDateTime getAppointmentDate() { return appointmentDate; }
@@ -18,6 +18,6 @@ public class AppointmentRequest {
     public void setNotes(String notes) { this.notes = notes; }
     public Long getPatientId() { return patientId; }
     public void setPatientId(Long patientId) { this.patientId = patientId; }
-    public Long getDoctorId() { return doctorId; }
-    public void setDoctorId(Long doctorId) { this.doctorId = doctorId; }
+    public Long getMedicId() { return medicId; } // Cambiar aquí
+    public void setMedicId(Long medicId) { this.medicId = medicId; } // Y aquí
 }

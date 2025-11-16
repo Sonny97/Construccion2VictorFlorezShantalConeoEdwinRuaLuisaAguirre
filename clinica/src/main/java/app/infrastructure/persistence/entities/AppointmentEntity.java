@@ -28,18 +28,19 @@ public class AppointmentEntity {
     private PatientEntity patient;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private DoctorEntity doctor;
+    @JoinColumn(name = "doctor_id", nullable = false) // ← CAMBIAR A doctor_id
+    private UserEntity medic; // Pero el campo Java sigue llamándose medic
 
     // Constructors
     public AppointmentEntity() {}
 
-    public AppointmentEntity(LocalDateTime appointmentDate, String status, String reason, PatientEntity patient, DoctorEntity doctor) {
+    public AppointmentEntity(LocalDateTime appointmentDate, String status, String reason, 
+                           PatientEntity patient, UserEntity medic) {
         this.appointmentDate = appointmentDate;
         this.status = status;
         this.reason = reason;
         this.patient = patient;
-        this.doctor = doctor;
+        this.medic = medic;
     }
 
     // Getters and Setters
@@ -55,6 +56,6 @@ public class AppointmentEntity {
     public void setNotes(String notes) { this.notes = notes; }
     public PatientEntity getPatient() { return patient; }
     public void setPatient(PatientEntity patient) { this.patient = patient; }
-    public DoctorEntity getDoctor() { return doctor; }
-    public void setDoctor(DoctorEntity doctor) { this.doctor = doctor; }
+    public UserEntity getMedic() { return medic; }
+    public void setMedic(UserEntity medic) { this.medic = medic; }
 }

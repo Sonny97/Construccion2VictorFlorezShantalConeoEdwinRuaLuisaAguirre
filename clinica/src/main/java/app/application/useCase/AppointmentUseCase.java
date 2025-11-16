@@ -1,16 +1,15 @@
 package app.application.usecase;
 
-import app.adapter.rest.mapper.DoctorRestMapper;
-import app.adapter.rest.mapper.PatientRestMapper;
 import app.domain.model.Appointment;
 import app.domain.model.Patient;
-import app.domain.model.Doctor;
+import app.domain.model.Employee;
+import app.domain.model.emuns.Role;
 import app.infrastructure.persistence.entities.AppointmentEntity;
 import app.infrastructure.persistence.entities.PatientEntity;
-import app.infrastructure.persistence.entities.DoctorEntity;
+import app.infrastructure.persistence.entities.UserEntity;
 import app.infrastructure.persistence.repository.AppointmentRepository;
 import app.infrastructure.persistence.repository.PatientRepository;
-import app.infrastructure.persistence.repository.DoctorRepository;
+import app.infrastructure.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -26,28 +25,29 @@ public class AppointmentUseCase {
     private PatientRepository patientRepository;
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private UserRepository userRepository;
 
-    @Autowired
-    private DoctorRestMapper doctorRestMapper;
-
-    @Autowired
-    private PatientRestMapper patientRestMapper;
-
-    public Appointment createAppointment(Appointment appointment, Long patientId, Long doctorId) {
-        // Find patient and doctor entities
+    public Appointment createAppointment(Appointment appointment, Long patientId, Long medicId) {
+        System.out.println("🎯 Creating appointment for patient: " + patientId + " with medic: " + medicId);
+        
+        // Find patient and medic entities
         PatientEntity patientEntity = patientRepository.findById(patientId)
                 .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
         
-        DoctorEntity doctorEntity = doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new RuntimeException("Doctor not found with id: " + doctorId));
+        UserEntity medicEntity = userRepository.findById(medicId)
+                .orElseThrow(() -> new RuntimeException("Medic not found with id: " + medicId));
+        
+        // Verify that the user is actually a medic
+        if (!"MEDIC".equals(medicEntity.getRole())) {
+            throw new RuntimeException("User with id " + medicId + " is not a medic");
+        }
 
         // Convert entities to domain models
         Patient patient = convertPatientEntityToDomain(patientEntity);
-        Doctor doctor = doctorRestMapper.toDomain(doctorEntity);
+        Employee medic = convertUserEntityToEmployee(medicEntity); // ← LLAMAR AL MÉTODO
 
         appointment.setPatient(patient);
-        appointment.setDoctor(doctor);
+        appointment.setMedic(medic);
         appointment.setStatus("SCHEDULED");
 
         // Convert to entity and save
@@ -57,11 +57,9 @@ public class AppointmentUseCase {
         entity.setReason(appointment.getReason());
         entity.setNotes(appointment.getNotes());
         entity.setPatient(patientEntity);
-        entity.setDoctor(doctorEntity);
+        entity.setMedic(medicEntity);
 
         AppointmentEntity savedEntity = appointmentRepository.save(entity);
-        savedEntity.setPatient(patientEntity); // Ensure patient is set
-        savedEntity.setDoctor(doctorEntity);   // Ensure doctor is set
 
         // Convert back to domain model
         return convertToDomain(savedEntity);
@@ -74,8 +72,8 @@ public class AppointmentUseCase {
                 .collect(Collectors.toList());
     }
 
-    public List<Appointment> getAppointmentsByDoctorId(Long doctorId) {
-        List<AppointmentEntity> entities = appointmentRepository.findByDoctorId(doctorId);
+    public List<Appointment> getAppointmentsByMedicId(Long medicId) {
+        List<AppointmentEntity> entities = appointmentRepository.findByMedicId(medicId);
         return entities.stream()
                 .map(this::convertToDomain)
                 .collect(Collectors.toList());
@@ -103,8 +101,8 @@ public class AppointmentUseCase {
             appointment.setPatient(convertPatientEntityToDomain(entity.getPatient()));
         }
         
-        if (entity.getDoctor() != null) {
-            appointment.setDoctor(doctorRestMapper.toDomain(entity.getDoctor()));
+        if (entity.getMedic() != null) {
+            appointment.setMedic(convertUserEntityToEmployee(entity.getMedic())); // ← LLAMAR AL MÉTODO
         }
         
         return appointment;
@@ -126,20 +124,32 @@ public class AppointmentUseCase {
         return patient;
     }
 
-    // Método auxiliar para convertir Patient a PatientEntity si es necesario
-    private PatientEntity convertPatientToEntity(Patient patient) {
-        PatientEntity entity = new PatientEntity();
-        entity.setId(patient.getId());
-        entity.setFirstName(patient.getFirstName());
-        entity.setLastName(patient.getLastName());
-        entity.setDocumentId(patient.getDocumentId());
-        entity.setBirthDate(patient.getBirthDate());
-        entity.setGender(patient.getGender());
-        entity.setAddress(patient.getAddress());
-        entity.setPhoneNumber(patient.getPhoneNumber());
-        entity.setEmergencyContact(patient.getEmergencyContact());
-        entity.setAllergies(patient.getAllergies());
-        entity.setMedicalConditions(patient.getMedicalConditions());
-        return entity;
+    // MÉTODO QUE FALTABA: Convertir UserEntity a Employee
+    private Employee convertUserEntityToEmployee(UserEntity entity) {
+        if (entity == null) return null;
+        
+        Employee employee = new Employee();
+        employee.setId(entity.getId());
+        employee.setUserName(entity.getUserName());
+        employee.setPassword(entity.getPassword());
+        employee.setFirstName(entity.getFirstName());
+        employee.setLastName(entity.getLastName());
+        employee.setEmail(entity.getEmail());
+        employee.setDocumentId(entity.getDocumentId());
+        employee.setBirthDate(entity.getBirthDate());
+        employee.setGender(entity.getGender());
+        employee.setAddress(entity.getAddress());
+        employee.setPhoneNumber(entity.getPhoneNumber());
+        
+        // Convert String role to Enum Role
+        if (entity.getRole() != null) {
+            try {
+                employee.setRole(Role.valueOf(entity.getRole()));
+            } catch (IllegalArgumentException e) {
+                System.out.println("⚠️ Unknown role: " + entity.getRole());
+            }
+        }
+        
+        return employee;
     }
 }

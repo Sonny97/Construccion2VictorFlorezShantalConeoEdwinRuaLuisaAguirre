@@ -9,17 +9,18 @@ public class Appointment {
     private String reason;
     private String notes;
     private Patient patient;
-    private Doctor doctor;
+    private Employee medic; // Cambiar de Doctor a Employee
 
     // Constructors
     public Appointment() {}
 
-    public Appointment(LocalDateTime appointmentDate, String status, String reason, Patient patient, Doctor doctor) {
+    public Appointment(LocalDateTime appointmentDate, String status, String reason, 
+                      Patient patient, Employee medic) {
         this.appointmentDate = appointmentDate;
         this.status = status;
         this.reason = reason;
         this.patient = patient;
-        this.doctor = doctor;
+        this.medic = medic;
     }
 
     // Getters and Setters
@@ -35,8 +36,8 @@ public class Appointment {
     public void setNotes(String notes) { this.notes = notes; }
     public Patient getPatient() { return patient; }
     public void setPatient(Patient patient) { this.patient = patient; }
-    public Doctor getDoctor() { return doctor; }
-    public void setDoctor(Doctor doctor) { this.doctor = doctor; }
+    public Employee getMedic() { return medic; }
+    public void setMedic(Employee medic) { this.medic = medic; }
 
     // Business logic methods
     public boolean isCompleted() {

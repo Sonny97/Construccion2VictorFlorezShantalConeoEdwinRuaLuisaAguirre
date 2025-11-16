@@ -26,7 +26,7 @@ public class VisitRestMapper {
         visit.setMedications(request.getMedications());
         visit.setProcedures(request.getProcedures());
         visit.setObservations(request.getObservations());
-        visit.setVisitDate(new Date()); // Fecha actual automáticamente
+        visit.setVisitDate(new Date()); 
         
         System.out.println("🔨 VisitRestMapper - Created visit for patient: " + request.getPatientId());
         return visit;

@@ -4,6 +4,7 @@ import app.domain.model.Invoice;
 import app.domain.model.MedicalInsurance;
 import app.domain.model.MedicalOrder;
 import app.domain.model.Patient;
+import app.domain.model.Appointment;
 import app.domain.services.InvoiceService;
 import app.domain.services.MedicalInsuranceService;
 import app.infrastructure.persistence.entities.*;
@@ -38,28 +39,65 @@ public class InvoiceUseCase {
     @Autowired
     private MedicalOrderRepository medicalOrderRepository;
 
-    public Invoice createInvoice(Invoice invoice, Long patientId, Long appointmentId, List<MedicalOrder> medicalOrders) {
+    public Invoice createInvoice(Invoice invoice, Long patientId, Long appointmentId,
+            List<MedicalOrder> medicalOrders) {
+        System.out.println("🎯 DEBUG - InvoiceUseCase.createInvoice called");
+        System.out.println(
+                "   invoice patient: " + (invoice.getPatient() != null ? invoice.getPatient().getId() : "null"));
+        System.out.println("   patientId param: " + patientId);
+        System.out.println("   appointmentId: " + appointmentId);
+
         // Find patient
+        System.out.println("🔍 DEBUG - Finding patient with id: " + patientId);
         PatientEntity patientEntity = patientRepository.findById(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found with id: " + patientId));
+                .orElseThrow(() -> {
+                    System.out.println("❌ Patient not found with id: " + patientId);
+                    return new RuntimeException("Patient not found with id: " + patientId);
+                });
+        System.out.println("✅ Patient found: " + patientEntity.getFirstName() + " " + patientEntity.getLastName());
+
+        // Asegurar que el invoice tenga el paciente - ESTA ES LA CLAVE
+        if (invoice.getPatient() == null) {
+            System.out.println("⚠️ WARNING: Invoice patient is null, setting from repository");
+            Patient patient = new Patient();
+            patient.setId(patientEntity.getId());
+            patient.setFirstName(patientEntity.getFirstName());
+            patient.setLastName(patientEntity.getLastName());
+            invoice.setPatient(patient);
+            System.out.println("✅ Patient set in invoice: " + patient.getId() + " - " + patient.getFirstName());
+        }
 
         // Find appointment (optional)
         AppointmentEntity appointmentEntity = null;
         if (appointmentId != null) {
             appointmentEntity = appointmentRepository.findById(appointmentId)
                     .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + appointmentId));
+            System.out.println("✅ Appointment found: " + appointmentId);
         }
 
         // Get medical insurance
         MedicalInsurance insurance = getMedicalInsuranceForPatient(patientId);
+        System.out.println("🔍 DEBUG - Medical insurance: " + (insurance != null ? "FOUND" : "NOT FOUND"));
+        if (insurance != null) {
+            System.out.println("   Insurance active: " + insurance.getIsPolicyActive());
+            System.out.println("   Policy valid: " + insurance.isPolicyValid());
+        }
 
         // Calculate annual copayment total
         Double annualCopaymentTotal = calculateAnnualCopaymentTotal(patientId);
+        System.out.println("💰 DEBUG - Annual copayment total: " + annualCopaymentTotal);
 
         // Calculate payments based on insurance
+        System.out.println("🔧 DEBUG - Calculating invoice payments...");
         invoice = invoiceService.calculateInvoicePayments(invoice, insurance, annualCopaymentTotal);
+        System.out.println("✅ Payments calculated:");
+        System.out.println("   Total: " + invoice.getTotalAmount());
+        System.out.println("   Copayment: " + invoice.getCopaymentAmount());
+        System.out.println("   Insurance: " + invoice.getInsuranceCoverage());
+        System.out.println("   Patient pays: " + invoice.getPatientPayment());
 
         // Validate invoice
+        System.out.println("🔍 DEBUG - Validating invoice...");
         invoiceService.validateInvoice(invoice);
 
         // Convert to entity and save
@@ -74,10 +112,13 @@ public class InvoiceUseCase {
         entity.setPatient(patientEntity);
         entity.setAppointment(appointmentEntity);
 
+        System.out.println("💾 DEBUG - Saving invoice entity...");
         InvoiceEntity savedInvoice = invoiceRepository.save(entity);
+        System.out.println("✅ Invoice saved with ID: " + savedInvoice.getId());
 
         // Save medical orders
         if (medicalOrders != null && !medicalOrders.isEmpty()) {
+            System.out.println("📋 DEBUG - Saving " + medicalOrders.size() + " medical orders...");
             List<MedicalOrderEntity> orderEntities = medicalOrders.stream()
                     .map(order -> {
                         MedicalOrderEntity orderEntity = new MedicalOrderEntity();
@@ -91,11 +132,13 @@ public class InvoiceUseCase {
                         return orderEntity;
                     })
                     .collect(Collectors.toList());
-            
+
             medicalOrderRepository.saveAll(orderEntities);
+            System.out.println("✅ Medical orders saved");
         }
 
         // Convert back to domain model
+        System.out.println("🔄 DEBUG - Converting back to domain model...");
         return convertToDomain(savedInvoice);
     }
 
@@ -129,9 +172,10 @@ public class InvoiceUseCase {
     private Double calculateAnnualCopaymentTotal(Long patientId) {
         LocalDate startOfYear = LocalDate.now().withDayOfYear(1);
         LocalDate endOfYear = LocalDate.now().withDayOfYear(365);
-        
-        List<InvoiceEntity> annualInvoices = invoiceRepository.findByPatientIdAndInvoiceDateBetween(patientId, startOfYear, endOfYear);
-        
+
+        List<InvoiceEntity> annualInvoices = invoiceRepository.findByPatientIdAndInvoiceDateBetween(patientId,
+                startOfYear, endOfYear);
+
         return annualInvoices.stream()
                 .mapToDouble(invoice -> invoice.getCopaymentAmount() != null ? invoice.getCopaymentAmount() : 0.0)
                 .sum();
@@ -147,7 +191,8 @@ public class InvoiceUseCase {
         invoice.setInsuranceCoverage(entity.getInsuranceCoverage());
         invoice.setPatientPayment(entity.getPatientPayment());
         invoice.setStatus(entity.getStatus());
-        
+
+        // Patient
         if (entity.getPatient() != null) {
             Patient patient = new Patient();
             patient.setId(entity.getPatient().getId());
@@ -155,8 +200,15 @@ public class InvoiceUseCase {
             patient.setLastName(entity.getPatient().getLastName());
             invoice.setPatient(patient);
         }
-        
-        // Load medical orders
+
+        // Appointment
+        if (entity.getAppointment() != null) {
+            Appointment appointment = new Appointment();
+            appointment.setId(entity.getAppointment().getId());
+            invoice.setAppointment(appointment);
+        }
+
+        // Load medical orders - CORREGIDO para establecer relación con invoice
         List<MedicalOrderEntity> orderEntities = medicalOrderRepository.findByInvoiceId(entity.getId());
         List<MedicalOrder> medicalOrders = orderEntities.stream()
                 .map(orderEntity -> {
@@ -168,12 +220,18 @@ public class InvoiceUseCase {
                     order.setCost(orderEntity.getCost());
                     order.setDosage(orderEntity.getDosage());
                     order.setInstructions(orderEntity.getInstructions());
+
+                    // NUEVO: Establecer relación con invoice
+                    Invoice orderInvoice = new Invoice();
+                    orderInvoice.setId(entity.getId()); // Usar el ID de la factura principal
+                    order.setInvoice(orderInvoice);
+
                     return order;
                 })
                 .collect(Collectors.toList());
-        
+
         invoice.setMedicalOrders(medicalOrders);
-        
+
         return invoice;
     }
 }

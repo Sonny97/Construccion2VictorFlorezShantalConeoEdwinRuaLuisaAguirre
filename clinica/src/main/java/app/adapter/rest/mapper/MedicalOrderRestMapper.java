@@ -34,8 +34,12 @@ public class MedicalOrderRestMapper {
         response.setDosage(order.getDosage());
         response.setInstructions(order.getInstructions());
         
+        // NUEVO: Establecer invoiceId si existe la relación
         if (order.getInvoice() != null) {
             response.setInvoiceId(order.getInvoice().getId());
+            System.out.println("✅ DEBUG - Medical order " + order.getId() + " linked to invoice: " + order.getInvoice().getId());
+        } else {
+            System.out.println("ℹ️ DEBUG - Medical order " + order.getId() + " has no invoice linked");
         }
         
         return response;
@@ -66,6 +70,15 @@ public class MedicalOrderRestMapper {
         order.setCost(entity.getCost());
         order.setDosage(entity.getDosage());
         order.setInstructions(entity.getInstructions());
+        
+        // NUEVO: Establecer la relación con Invoice en el domain model
+        if (entity.getInvoice() != null) {
+            // Crear un objeto Invoice básico con solo el ID
+            app.domain.model.Invoice invoice = new app.domain.model.Invoice();
+            invoice.setId(entity.getInvoice().getId());
+            order.setInvoice(invoice);
+        }
+        
         return order;
     }
 }

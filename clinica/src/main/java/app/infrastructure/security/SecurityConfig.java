@@ -26,7 +26,7 @@
                  .requestMatchers("/api/rh/**").hasRole("HUMAN_RESOURCES")
                  .requestMatchers("/api/medic/**").hasRole("MEDIC")
                  .requestMatchers("/api/nurse/**").hasRole("NURSE")
-                 .requestMatchers("/api/administrative/**").hasRole("ADMINISTRATIVE")
+                 .requestMatchers("/api/admin/**").hasRole("ADMINISTRATIVE")
                  .anyRequest().authenticated()
              .and()
              .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

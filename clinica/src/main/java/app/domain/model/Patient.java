@@ -3,8 +3,8 @@ package app.domain.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import app.domain.model.Appointment;
 
-import app.domain.services.Appointment;
 
 public class Patient {
     private Long id;
@@ -18,11 +18,9 @@ public class Patient {
     private String emergencyContact;
     private String allergies;
     private String medicalConditions;
-    // NUEVAS RELACIONES
-    private EmergencyContact detailedEmergencyContact;
+     private EmergencyContact detailedEmergencyContact;
     private MedicalInsurance medicalInsurance;
-    private List<Appointment> appointments = new ArrayList<>();
-    private List<Invoice> invoices = new ArrayList<>();
+    private List<Appointment> appointments = new ArrayList<>(); // ← DEBE SER domain.model.Appointment
 
 
      public Patient() {}
@@ -73,9 +71,6 @@ public class Patient {
     public MedicalInsurance getMedicalInsurance() { return medicalInsurance; }
     public void setMedicalInsurance(MedicalInsurance medicalInsurance) { this.medicalInsurance = medicalInsurance; }
     
-    public List<Appointment> getAppointments() { return appointments; }
+   public List<Appointment> getAppointments() { return appointments; }
     public void setAppointments(List<Appointment> appointments) { this.appointments = appointments; }
-    
-    public List<Invoice> getInvoices() { return invoices; }
-    public void setInvoices(List<Invoice> invoices) { this.invoices = invoices; }
 }

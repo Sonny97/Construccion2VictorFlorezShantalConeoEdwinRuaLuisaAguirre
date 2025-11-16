@@ -3,6 +3,8 @@ package app.adapter.rest.mapper;
 import app.adapter.rest.request.AppointmentRequest;
 import app.adapter.rest.response.AppointmentResponse;
 import app.domain.model.Appointment;
+import app.domain.model.Patient;
+import app.domain.model.Employee;
 import app.infrastructure.persistence.entities.AppointmentEntity;
 import org.springframework.stereotype.Component;
 
@@ -10,18 +12,23 @@ import org.springframework.stereotype.Component;
 public class AppointmentRestMapper {
 
     public Appointment toDomain(AppointmentRequest request) {
-        if (request == null) return null;
+        if (request == null) {
+            return null;
+        }
         
         Appointment appointment = new Appointment();
         appointment.setAppointmentDate(request.getAppointmentDate());
         appointment.setStatus("SCHEDULED");
         appointment.setReason(request.getReason());
         appointment.setNotes(request.getNotes());
+        
         return appointment;
     }
 
     public AppointmentResponse toResponse(Appointment appointment) {
-        if (appointment == null) return null;
+        if (appointment == null) {
+            return null;
+        }
         
         AppointmentResponse response = new AppointmentResponse();
         response.setId(appointment.getId());
@@ -30,15 +37,18 @@ public class AppointmentRestMapper {
         response.setReason(appointment.getReason());
         response.setNotes(appointment.getNotes());
         
+        // Patient information
         if (appointment.getPatient() != null) {
             response.setPatientId(appointment.getPatient().getId());
             response.setPatientName(appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName());
         }
         
-        if (appointment.getDoctor() != null) {
-            response.setDoctorId(appointment.getDoctor().getId());
-            response.setDoctorName(appointment.getDoctor().getFullName());
-            response.setDoctorSpecialization(appointment.getDoctor().getSpecialization());
+        // Medic information (cambiar de Doctor a Employee)
+        if (appointment.getMedic() != null) {
+            response.setDoctorId(appointment.getMedic().getId());
+            response.setDoctorName(appointment.getMedic().getFirstName() + " " + appointment.getMedic().getLastName());
+           
+            response.setDoctorSpecialization("Médico General"); // Por defecto
         }
         
         return response;
@@ -55,7 +65,7 @@ public class AppointmentRestMapper {
         entity.setNotes(appointment.getNotes());
         return entity;
     }
-
+    
     public Appointment toDomain(AppointmentEntity entity) {
         if (entity == null) return null;
         
