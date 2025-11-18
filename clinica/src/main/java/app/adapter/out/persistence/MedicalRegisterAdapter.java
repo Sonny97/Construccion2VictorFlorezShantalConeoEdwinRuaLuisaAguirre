@@ -6,7 +6,7 @@ import app.domain.model.MedicalRegister;
 import app.domain.ports.MedicalRegisterPort;
 import app.infrastructure.persistence.entities.MedicalRegisterEntity;
 import app.infrastructure.persistence.mapper.MedicalRegisterMapper;
-import app.infrastructure.persistence.repository.MedicalRegisterRepository;
+import app.infrastructure.persistence.repository.MedicaRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class MedicalRegisterAdapter implements MedicalRegisterPort {
 
     @Autowired
-    private MedicalRegisterRepository medicalRegisterRepository;
+    private MedicaRepository medicalRegisterRepository;
 
     @Override
     public MedicalRegister findById(Long id) throws Exception {
