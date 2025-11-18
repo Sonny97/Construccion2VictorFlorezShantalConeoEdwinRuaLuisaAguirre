@@ -1,0 +1,63 @@
+POST http://localhost:8081/api/medical-histories
+
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer {tu_token_jwt_de_medico}"
+}
+
+201: {
+  "patientId": 1,
+  "patientName": "Juan Pérez García",
+  "bloodType": "O+",
+  "allergies": "Penicilina, Polen de gramíneas, Mariscos",
+  "chronicDiseases": "Diabetes tipo 2, Hipertensión arterial",
+  "familyHistory": "Padre: Diabetes, Hipertensión. Madre: Cáncer de mama. Abuelo paterno: Enfermedad cardiovascular",
+  "surgicalHistory": "2018: Apendicectomía. 2020: Colecistectomía laparoscópica",
+  "observations": "Paciente con control regular de glucosa. Requiere seguimiento trimestral. Adherente al tratamiento."
+}
+
+GET http://localhost:8080/api/medical-histories/patient/{patientId}
+
+201: 
+{
+  "id": 15,
+  "patientId": 1,
+  "patientName": "Juan Pérez García",
+  "creationDate": "2025-11-18T10:30:00",
+  "lastUpdateDate": "2025-11-18T15:45:00",
+  "bloodType": "O+",
+  "allergies": "Penicilina, Polen de gramíneas, Mariscos",
+  "chronicDiseases": "Diabetes tipo 2, Hipertensión arterial",
+  "familyHistory": "Padre: Diabetes, Hipertensión. Madre: Cáncer de mama",
+  "surgicalHistory": "2018: Apendicectomía. 2020: Colecistectomía laparoscópica",
+  "observations": "Paciente con control regular de glucosa. Requiere seguimiento trimestral.",
+  "medicalRegisters": [
+    {
+      "id": 101,
+      "patientId": 1,
+      "medicId": 5,
+      "registerDate": "2025-11-15T14:30:00",
+      "inquiryReason": "Control de diabetes",
+      "symptoms": "Fatiga leve",
+      "physicalExam": "Presión arterial: 130/85 mmHg",
+      "diagnosis": "Diabetes tipo 2 controlada",
+      "treatment": "Continuar con metformina 850mg",
+      "prescriptions": "Metformina 850mg - 1 tableta cada 12 horas",
+      "observations": "Paciente estable"
+    },
+    {
+      "id": 95,
+      "patientId": 1,
+      "medicId": 5,
+      "registerDate": "2025-08-10T09:00:00",
+      "inquiryReason": "Control rutinario",
+      "symptoms": "Ninguno",
+      "physicalExam": "Examen físico normal",
+      "diagnosis": "Control preventivo",
+      "treatment": "Mantener dieta y ejercicio",
+      "prescriptions": "Sin cambios en medicación",
+      "observations": "Buen control general"
+    }
+  ],
+  "totalRegisters": 2
+}
