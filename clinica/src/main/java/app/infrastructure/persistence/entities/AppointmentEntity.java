@@ -28,8 +28,8 @@ public class AppointmentEntity {
     private PatientEntity patient;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id", nullable = false) // ← CAMBIAR A doctor_id
-    private UserEntity medic; // Pero el campo Java sigue llamándose medic
+    @JoinColumn(name = "doctor_id", nullable = false) 
+    private UserEntity medic; 
 
     // Constructors
     public AppointmentEntity() {}

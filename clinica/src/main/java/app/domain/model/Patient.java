@@ -18,7 +18,7 @@ public class Patient {
     private String emergencyContact;
     private String allergies;
     private String medicalConditions;
-     private EmergencyContact detailedEmergencyContact;
+    private EmergencyContact detailedEmergencyContact;
     private MedicalInsurance medicalInsurance;
     private List<Appointment> appointments = new ArrayList<>(); // ← DEBE SER domain.model.Appointment
 

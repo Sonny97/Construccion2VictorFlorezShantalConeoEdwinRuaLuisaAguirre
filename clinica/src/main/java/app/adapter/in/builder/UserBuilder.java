@@ -20,22 +20,22 @@ public class UserBuilder {
             String firstName, 
             String lastName, 
             String email, 
-            long documentId,        
+            Long documentId,        
             LocalDate birthDate,    
             String gender,
             String address, 
             String phoneNumber
     ) throws Exception {
         Employee employee = new Employee();
-        employee.setUserName(userValidator.userNameValidator(userName));
-        employee.setPassword(userValidator.passwordValidator(password));
-        employee.setFirstName(userValidator.nameValidator(firstName));
-        employee.setLastName(userValidator.lastNameValidator(lastName));
-        employee.setDocumentId(documentId);
-        employee.setEmail(userValidator.emailValidator(email));
-        employee.setGender(userValidator.genderValidator(gender));
-        employee.setBirthDate(birthDate);
-        employee.setAddress(userValidator.addressValidator(address));
+        employee.setUserName(userValidator.validateUsername(userName));
+        employee.setPassword(userValidator.validatePassword(password));
+        employee.setFirstName(userValidator.validateUsername(firstName));
+        employee.setLastName(userValidator.validateUsername(lastName));
+        employee.setDocumentId(userValidator.validateDocumentId(documentId));
+        employee.setEmail(userValidator.validateEmail(email));
+        employee.setGender(gender);
+        employee.setBirthDate(userValidator.validateBirthDate(birthDate));
+        employee.setAddress(userValidator.validateAddress(address));
         employee.setPhoneNumber(phoneNumber); 
         return employee;
     }

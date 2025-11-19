@@ -19,7 +19,6 @@ public class CreateUsers {
     private UserPort userPort;
 
     public void create(Employee employee) throws Exception {
-    // Usar los métodos corregidos
     if (userPort.findByDocument(employee.getDocumentId()) != null) {
         throw new Exception("Ya existe una persona registrada con esa cédula: " + employee.getDocumentId());
     }
