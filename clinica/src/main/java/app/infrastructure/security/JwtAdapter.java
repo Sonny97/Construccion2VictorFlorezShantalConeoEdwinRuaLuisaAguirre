@@ -14,7 +14,7 @@ import java.util.UUID;
 @Component
 public class JwtAdapter implements AuthenticationPort {
     private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private static final long EXPIRATION_TIME = 10 * 60 * 1000;
+    private static final long EXPIRATION_TIME =  15 * (60 * 1000);
 
     @Override
     public TokenResponse authenticate(AuthCredentials credentials, String role) {

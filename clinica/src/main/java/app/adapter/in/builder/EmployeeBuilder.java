@@ -1,13 +1,11 @@
 package app.adapter.in.builder;
 
-import java.time.LocalDate;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import app.adapter.in.validators.UserValidator;
 import app.domain.model.Employee;
 import app.domain.model.emuns.Role;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import java.time.LocalDate;
 
 @Component
 public class EmployeeBuilder {
@@ -17,30 +15,42 @@ public class EmployeeBuilder {
 
     public Employee build(
             String userName,
-            String password,
-            String firstName,
-            String lastName,
-            String email,
-            long documentId,
-            LocalDate birthDate,
+            String password, 
+            String firstName, 
+            String lastName, 
+            String email, 
+            Long documentId, 
+            LocalDate birthDate, 
             String gender,
-            String address,
+            String address, 
             String phoneNumber,
-            Role role) throws Exception {
+            Role role 
+    ) throws Exception {
+        
+        // 🔥 APLICAR VALIDACIONES
+        String validatedUsername = userValidator.validateUsername(userName);
+        String validatedPassword = userValidator.validatePassword(password);
+        String validatedFirstName = userValidator.validateFullName(firstName + " " + lastName).split(" ")[0];
+        String validatedLastName = userValidator.validateFullName(firstName + " " + lastName).split(" ")[1];
+        String validatedEmail = userValidator.validateEmail(email);
+        Long validatedDocumentId = userValidator.validateDocumentId(documentId);
+        LocalDate validatedBirthDate = userValidator.validateBirthDate(birthDate);
+        String validatedAddress = userValidator.validateAddress(address);
+        String validatedPhone = userValidator.validatePhoneNumber(phoneNumber);
+
         Employee employee = new Employee();
-        employee.setUserName(userValidator.userNameValidator(userName));
-        employee.setPassword(userValidator.passwordValidator(password));
-        employee.setFirstName(userValidator.nameValidator(firstName));
-        employee.setLastName(userValidator.lastNameValidator(lastName));
-        employee.setEmail(userValidator.emailValidator(email));
-        employee.setDocumentId(documentId);
-        employee.setBirthDate(birthDate);
-        employee.setGender(userValidator.genderValidator(gender));
-        employee.setAddress(userValidator.addressValidator(address));
-        employee.setPhoneNumber(phoneNumber);
-        if (role != null) {
-            employee.setRole(role);
-        }
+        employee.setUserName(validatedUsername);
+        employee.setPassword(validatedPassword); 
+        employee.setFirstName(validatedFirstName);
+        employee.setLastName(validatedLastName);
+        employee.setEmail(validatedEmail);
+        employee.setDocumentId(validatedDocumentId);
+        employee.setBirthDate(validatedBirthDate);
+        employee.setGender(gender); 
+        employee.setAddress(validatedAddress);
+        employee.setPhoneNumber(validatedPhone);
+        employee.setRole(role);
+        
         return employee;
     }
 }

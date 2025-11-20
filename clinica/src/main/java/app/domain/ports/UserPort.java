@@ -4,7 +4,7 @@ import app.domain.model.Employee;
 
 public interface UserPort {
     Employee findByDocument(Long documentId) throws Exception;
-    Employee findByUserName(String userName) throws Exception; // Cambiado a String
+    Employee findByUserName(String userName) throws Exception; 
     Employee findById(Long id) throws Exception;
     void save(Employee employee) throws Exception;
 	void deleteById(Long id) throws Exception;

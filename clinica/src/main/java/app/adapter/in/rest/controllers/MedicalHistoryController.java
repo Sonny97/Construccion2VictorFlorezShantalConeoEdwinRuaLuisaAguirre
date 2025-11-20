@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/medical-histories")
+@PreAuthorize("hasRole('MEDIC')")
 public class MedicalHistoryController {
 
     @Autowired
@@ -30,7 +31,6 @@ public class MedicalHistoryController {
      * Solo médicos pueden crear historias clínicas
      */
     @PostMapping
-    @PreAuthorize("hasRole('MEDIC')")
     public ResponseEntity<MedicalHistoryResponse> createMedicalHistory(@RequestBody MedicalHistoryRequest request) {
         try {
             System.out.println("🎯 ENTRY POINT HIT - CREATE MEDICAL HISTORY");
