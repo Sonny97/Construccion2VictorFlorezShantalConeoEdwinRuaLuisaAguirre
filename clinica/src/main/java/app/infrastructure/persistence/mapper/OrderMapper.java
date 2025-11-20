@@ -2,6 +2,7 @@ package app.infrastructure.persistence.mapper;
 
 import app.domain.model.Order;
 import app.infrastructure.persistence.entities.OrderEntity;
+import app.infrastructure.persistence.entities.PatientEntity;
 
 public class OrderMapper {
     
@@ -10,7 +11,11 @@ public class OrderMapper {
         
         OrderEntity entity = new OrderEntity();
         entity.setId(order.getId());
-        entity.setPatientId(order.getPatientId());
+        if (order.getPatientId() != null) {
+            PatientEntity patient = new PatientEntity();
+            patient.setId(order.getPatientId());
+            entity.setPatient(patient);
+        }
         entity.setMedicId(order.getMedicId());
         entity.setDescription(order.getDescription());
         entity.setOrderType(order.getOrderType());
@@ -18,7 +23,6 @@ public class OrderMapper {
         entity.setOrderDate(order.getOrderDate());
         entity.setCompletionDate(order.getCompletionDate());
         entity.setNotes(order.getNotes());
-        
         return entity;
     }
     
@@ -27,7 +31,10 @@ public class OrderMapper {
         
         Order order = new Order();
         order.setId(entity.getId());
-        order.setPatientId(entity.getPatientId());
+        // Mapear PatientEntity a patientId
+        if (entity.getPatient() != null) {
+            order.setPatientId(entity.getPatient().getId());
+        }
         order.setMedicId(entity.getMedicId());
         order.setDescription(entity.getDescription());
         order.setOrderType(entity.getOrderType());
@@ -35,7 +42,6 @@ public class OrderMapper {
         order.setOrderDate(entity.getOrderDate());
         order.setCompletionDate(entity.getCompletionDate());
         order.setNotes(entity.getNotes());
-        
         return order;
     }
 }
