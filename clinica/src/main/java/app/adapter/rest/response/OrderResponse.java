@@ -1,4 +1,8 @@
 package app.adapter.rest.response;
+import java.util.List;
+import app.adapter.rest.response.OrderItemResponse;
+    
+
 
 import java.time.LocalDateTime;
 
@@ -12,6 +16,10 @@ public class OrderResponse {
     private LocalDateTime orderDate;
     private LocalDateTime completionDate;
     private String notes;
+    private List<OrderItemResponse> items;
+
+    public List<OrderItemResponse> getItems() { return items; }
+    public void setItems(List<OrderItemResponse> items) { this.items = items; }
 
     // Getters and Setters
     public Long getId() {

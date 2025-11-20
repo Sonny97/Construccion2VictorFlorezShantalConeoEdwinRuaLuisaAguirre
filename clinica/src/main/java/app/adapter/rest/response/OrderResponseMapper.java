@@ -1,40 +1,15 @@
-package app.adapter.rest.mapper;
+package app.adapter.rest.response;
 
-import java.util.List;
-import java.util.ArrayList;
+import app.domain.model.Order;
+import app.adapter.rest.response.OrderResponse;
 import app.adapter.rest.response.OrderItemResponse;
 import app.adapter.rest.request.OrderItemRequest;
+import java.util.ArrayList;
+import java.util.List;
 
-
-import org.springframework.stereotype.Component;
-import app.adapter.rest.request.OrderRequest;
-import app.adapter.rest.response.OrderResponse;
-import app.domain.model.Order;
-
-@Component
-public class OrderRestMapper {
-
-    public Order toDomain(OrderRequest request) {
-        if (request == null) return null;
-        
-        Order order = new Order();
-        order.setPatientId(request.getPatientId());
-        order.setMedicId(request.getMedicId());
-        order.setDescription(request.getDescription());
-        order.setOrderType(request.getOrderType());
-        order.setStatus(request.getStatus());
-        order.setOrderDate(request.getOrderDate());
-        order.setCompletionDate(request.getCompletionDate());
-        order.setNotes(request.getNotes());
-        
-        // Mapear los ítems del request al modelo
-        order.setItems(request.getItems());
-        return order;
-    }
-
-    public OrderResponse toResponse(Order order) {
+public class OrderResponseMapper {
+    public static OrderResponse toResponse(Order order) {
         if (order == null) return null;
-        
         OrderResponse response = new OrderResponse();
         response.setId(order.getId());
         response.setPatientId(order.getPatientId());
@@ -45,8 +20,7 @@ public class OrderRestMapper {
         response.setOrderDate(order.getOrderDate());
         response.setCompletionDate(order.getCompletionDate());
         response.setNotes(order.getNotes());
-        
-        // Mapear los ítems del modelo a la respuesta
+        // Mapear los ítems
         if (order.getItems() != null) {
             List<OrderItemResponse> itemResponses = new ArrayList<>();
             int itemNumber = 1;

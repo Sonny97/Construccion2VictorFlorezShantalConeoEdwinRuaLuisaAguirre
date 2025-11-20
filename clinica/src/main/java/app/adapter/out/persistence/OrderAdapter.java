@@ -50,7 +50,19 @@ public class OrderAdapter implements OrderPort {
     public void save(Order order) throws Exception {
         OrderEntity entity = OrderMapper.toEntity(order);
         OrderEntity savedEntity = orderRepository.save(entity);
+        // Actualizar el modelo con el ID y los ítems realmente guardados
         order.setId(savedEntity.getId());
+        if (savedEntity.getItems() != null) {
+            // Mapear los ítems guardados a OrderItemRequest para el modelo
+            List<app.adapter.rest.request.OrderItemRequest> itemRequests = new java.util.ArrayList<>();
+            for (app.infrastructure.persistence.entities.OrderItemEntity itemEntity : savedEntity.getItems()) {
+                app.adapter.rest.request.OrderItemRequest itemReq = new app.adapter.rest.request.OrderItemRequest();
+                itemReq.setItemType(itemEntity.getItemType());
+                itemReq.setItemName(itemEntity.getItemName());
+                itemRequests.add(itemReq);
+            }
+            order.setItems(itemRequests);
+        }
     }
 
     @Override

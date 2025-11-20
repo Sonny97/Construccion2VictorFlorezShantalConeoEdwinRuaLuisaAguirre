@@ -1,5 +1,8 @@
 package app.infrastructure.persistence.entities;
 
+import java.util.List;
+import java.util.ArrayList;
+import app.infrastructure.persistence.entities.OrderItemEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -35,6 +38,16 @@ public class OrderEntity {
     
     @Column(length = 1000)
     private String notes;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<OrderItemEntity> items = new ArrayList<>();
+
+    public List<OrderItemEntity> getItems() {
+        return items;
+    }
+    public void setItems(List<OrderItemEntity> items) {
+        this.items = items;
+    }
 
     // Getters and Setters
     public Long getId() {

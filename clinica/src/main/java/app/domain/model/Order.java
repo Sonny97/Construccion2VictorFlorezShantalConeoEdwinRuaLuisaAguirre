@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import java.util.List;
+import app.adapter.rest.request.OrderItemRequest;
 import java.time.LocalDateTime;
 
 public class Order {
@@ -12,6 +14,11 @@ public class Order {
     private LocalDateTime orderDate;
     private LocalDateTime completionDate;
     private String notes;
+        private List<OrderItemRequest> items;
+
+    public List<OrderItemRequest> getItems() { return items; }
+    public void setItems(List<OrderItemRequest> items) { this.items = items; }
+
 
     // Constructors
     public Order() {}

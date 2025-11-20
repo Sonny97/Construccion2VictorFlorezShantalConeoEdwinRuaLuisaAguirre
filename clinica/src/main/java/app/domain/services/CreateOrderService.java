@@ -39,7 +39,16 @@ public class CreateOrderService {
             order.setOrderDate(LocalDateTime.now());
         }
         
-        // Guardar la orden
+        // Regla de negocio: Si hay una ayuda diagnóstica, no puede haber medicamentos ni procedimientos
+        if (order.getItems() != null && !order.getItems().isEmpty()) {
+            boolean hasAyuda = order.getItems().stream().anyMatch(i -> "ayuda".equalsIgnoreCase(i.getItemType()));
+            boolean hasMedicamento = order.getItems().stream().anyMatch(i -> "medicamento".equalsIgnoreCase(i.getItemType()));
+            boolean hasProcedimiento = order.getItems().stream().anyMatch(i -> "procedimiento".equalsIgnoreCase(i.getItemType()));
+            if (hasAyuda && (hasMedicamento || hasProcedimiento)) {
+                throw new Exception("No se puede recetar procedimiento ni medicamento junto con ayuda diagnóstica en la misma orden.");
+            }
+        }
+        // Guardar la orden (incluyendo ítems)
         orderPort.save(order);
         return order;
     }
