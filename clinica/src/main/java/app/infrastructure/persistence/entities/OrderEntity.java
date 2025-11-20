@@ -11,8 +11,9 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
-    private Long patientId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private PatientEntity patient;
     
     @Column(nullable = false)
     private Long medicId;
@@ -44,12 +45,12 @@ public class OrderEntity {
         this.id = id;
     }
 
-    public Long getPatientId() {
-        return patientId;
+    public PatientEntity getPatient() {
+        return patient;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
     }
 
     public Long getMedicId() {
